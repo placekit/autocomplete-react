@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React, { forwardRef, useEffect, useMemo } from 'react';
 
 import { usePlaceKit } from './usePlaceKit';
 
-const PlaceKit = ({
+const PlaceKit = forwardRef(({
   apiKey,
   useGeolocation,
   className,
@@ -16,7 +16,7 @@ const PlaceKit = ({
   onGeolocation,
   onFreeForm,
   ...inputProps
-}) => {
+}, ref) => {
   const opts = useMemo(
     () => {
       const output = options;
@@ -40,11 +40,25 @@ const PlaceKit = ({
       onPick,
       onError,
       onGeolocation,
-      onFreeForm
+      onFreeForm,
+      ref
     ]
   );
   
   const { target, client, hasGeolocation } = usePlaceKit(apiKey, opts);
+
+  useEffect(
+    () => {
+      if (target.current && typeof ref !== 'undefined') {
+        if (typeof ref === 'function') {
+          ref(target.current);
+        } else {
+          ref.current = target.current;
+        }
+      }
+    },
+    [target]
+  );
 
   return (
     <div
@@ -68,23 +82,24 @@ const PlaceKit = ({
           <span className="pka-sr-only">Activate geolocation</span>
         </button>
       )}
+      <button
+        className="pka-input-clear"
+        title="Clear value"
+        aria-hidden={!target.current?.value}
+        onClick={client?.clear}
+        disabled={inputProps.disabled}
+      >
+        <span className="pka-sr-only">Clear value</span>
+      </button>
       <input
         placeholder="Search places..."
         {...inputProps}
         ref={target}
         type="search"
       />
-      <button
-        className="pka-input-clear"
-        title="Clear value"
-        onClick={client?.clear}
-        disabled={inputProps.disabled}
-      >
-        <span className="pka-sr-only">Clear value</span>
-      </button>
     </div>
   );
-};
+});
 
 PlaceKit.defaultProps = {
   useGeolocation: true,

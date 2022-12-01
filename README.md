@@ -86,6 +86,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
 Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js) documentation for more details about the options.
 
 A few additional notes:
+- The `<input>` is using React `ref` attribute. It is therefore an [uncontrolled component](https://reactjs.org/docs/uncontrolled-components.html) and should be treated as such.
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.

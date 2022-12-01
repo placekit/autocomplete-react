@@ -10,7 +10,7 @@ export const usePlaceKit = (apiKey, options) => {
     throw Error('PlaceKit: `options` parameter is invalid, expected an object.');
   }
 
-  const target = useRef();
+  const target = useRef(null);
   const [client, setClient] = useState();
   const [isFreeForm, setIsFreeForm] = useState(true);
   const [hasGeolocation, setHasGeolocation] = useState(false);
@@ -24,7 +24,7 @@ export const usePlaceKit = (apiKey, options) => {
       const { handlers, ...opts } = options || {};
       const pka = placekit(apiKey, {
         target: target.current,
-        options: opts,
+        ...opts,
       })
         .on('open', handlers?.onOpen)
         .on('close', handlers?.onClose)
