@@ -17,6 +17,7 @@
   "main": "./dist/placekit-autocomplete.cjs.js",
   "exports": {
     ".": {
+      "types": "./dist/placekit-autocomplete.d.ts",
       "require": "./dist/placekit-autocomplete.cjs.js",
       "import": "./dist/placekit-autocomplete.esm.js"
     }
