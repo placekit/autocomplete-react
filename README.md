@@ -43,15 +43,28 @@ export default MyComponent;
 ```
 
 Also, import default style from `@placekit/autocomplete-js/dist/placekit-autocomplete.css` (`@placekit/autocomplete-js` is set as a dependency of this package and will automatically be installed). It will style the suggestions list and the input.
+If you have trouble importing CSS from `node_modules`, copy/paste [its content](https://github.com/placekit/autocomplete-js/blob/main/src/placekit.css) into your own CSS.
 
-## 🧱 Component properties
+## ⚙️ Component properties
 
 ```jsx
 <PlaceKit
   apiKey="<your-api-key>"
   useGeolocation={false} // hide "ask geolocation" button
   className="your-custom-classes" // <div> wrapper custom classes
-  options={{}} // PlaceKit Autocomplete JS options
+
+  // PlaceKit Autocomplete JS options
+  options={{
+    offset: 4,
+    template: (item, index) => {},
+    formatValue: (item) => {},
+    timeout: 5000,
+    maxResults: 5,
+    types: ['city'],
+    language: 'fr',
+    countries: ['fr'],
+    coordinates: '48.86,2.29',
+  }}
 
   // handlers
   onOpen={() => {}}
@@ -75,7 +88,7 @@ Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocompl
 A few additional notes:
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
-- Handlers have their own property for ease of access.
+- Handlers are exposed directly as properties for ease of access.
 
 ## 🪝 Custom hook
 
