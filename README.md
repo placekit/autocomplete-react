@@ -1,0 +1,106 @@
+<h1 align="center">
+  PlaceKit Autocomplete React Library
+</h1>
+
+<p align="center">
+  <b>All-in-one autocomplete experience for your React web apps</b>
+</p>
+
+<p align="center">
+  <a href="#-quick-start">Quick start</a> • 
+  <a href="#-component-properties">Component properties</a> • 
+  <a href="#-custom-hook">Custom hook</a> • 
+  <a href="https://placekit.io/docs">Documentation</a> • 
+  <a href="#%EF%B8%8F-license">License</a>
+</p>
+
+---
+
+PlaceKit Autocomplete React Library is a React wrapper of [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js).
+It features a [compoment](./src/PlaceKit.jsx) ready to use, and a [custom hook](./src/usePlaceKit.js) for custom implementations.
+It also is **TypeScript compatible**.
+
+## 🎯 Quick start
+
+First, install PlaceKit Autocomplete React using [npm](https://docs.npmjs.com/getting-started) package manager:
+
+```sh
+npm install --save @placekit/autocomplete-react
+```
+
+Then import the package and perform your first address search:
+
+```jsx
+import { PlaceKit } from '@placekit/autocomplete-react';
+
+const MyComponent = (props) => {
+  return (
+    <PlaceKit apiKey="<your-api-key>" />
+  );
+};
+
+export default MyComponent;
+```
+
+Also, import default style from `@placekit/autocomplete-js/dist/placekit-autocomplete.css` (`@placekit/autocomplete-js` is set as a dependency of this package and will automatically be installed). It will style the suggestions list and the input.
+
+## 🧱 Component properties
+
+```jsx
+<PlaceKit
+  apiKey="<your-api-key>"
+  useGeolocation={false} // hide "ask geolocation" button
+  className="your-custom-classes" // <div> wrapper custom classes
+  options={{}} // PlaceKit Autocomplete JS options
+
+  // handlers
+  onOpen={() => {}}
+  onClose={() => {}}
+  onResults={(query, results) => {}}
+  onPick={(value, item, index) => {}}
+  onError={(error) => {}}
+  onGeolocation={(isFreeForm) => {}}
+  onFreeForm={(hasGeolocation, position) => {}}
+
+  // and any other property will be forwared to the <input> element
+  id="my-input"
+  name="address"
+  placeholder="Search places..."
+  disabled={true}
+/>
+```
+
+Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js) documentation for more details about the options.
+
+A few additional notes:
+- If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
+- If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
+- Handlers have their own property for ease of access.
+
+## 🪝 Custom hook
+
+If our component doesn't suit your needs, you can build your own using the provided custom hook `usePlaceKit()`:
+
+```jsx
+import { usePlaceKit } from '@placekit/autocomplete-react';
+
+const MyComponent = (props) => {
+  const { target, client, isFreeForm, hasGeolocation } = usePlaceKit('<your-api-key>', {});
+
+  return (
+    <input ref={target} />
+  );
+};
+```
+
+Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js) documentation for more details about the options.
+
+A few additional notes:
+- `target` is a React `ref` object.
+- The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case).
+- Don't pass a destructured object as `usePlaceKit` options (second argument), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
+- `isFreeForm` and `hasGeolocation` are separately set inside the hook, as `client.isFreeForm` and `client.hasGeolocation` are stateless.
+
+## ⚖️ License
+
+PlaceKit Autocomplete is an open-sourced software licensed under the [MIT license](./LICENSE).

@@ -1,0 +1,63 @@
+{
+  "name": "@placekit/autocomplete-react",
+  "version": "0.0.1",
+  "author": "Nicolas Torres <nicolas@placekit.io>",
+  "description": "PlaceKit Autocomplete React library",
+  "license": "MIT",
+  "homepage": "https://github.com/placekit/autocomplete-react#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/placekit/autocomplete-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/placekit/autocomplete-react/issues"
+  },
+  "types": "./dist/placekit-autocomplete.d.ts",
+  "module": "./dist/placekit-autocomplete.esm.js",
+  "main": "./dist/placekit-autocomplete.cjs.js",
+  "exports": {
+    ".": {
+      "require": "./dist/placekit-autocomplete.cjs.js",
+      "import": "./dist/placekit-autocomplete.esm.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "watch": {
+    "build": "src/*.*"
+  },
+  "scripts": {
+    "clear": "rimraf ./dist",
+    "dev": "npm-watch build",
+    "build": "rollup -c",
+    "lint": "eslint ./src",
+    "format": "eslint ./src --fix"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/runtime": "^7.19.0",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "eslint": "^8.17.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.31.11",
+    "npm-watch": "^0.11.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.75.6",
+    "rollup-plugin-copy": "^3.4.0"
+  },
+  "dependencies": {
+    "@placekit/autocomplete-js": "file:../placekit-autocomplete-js",
+    "@types/react": "^18.0.25",
+    "prop-types": "^15.8.1"
+  },
+  "peerDependencies": {
+    "react": "^16 || ^17 || ^18",
+    "react-dom": "^16 || ^17 || ^18"
+  }
+}
