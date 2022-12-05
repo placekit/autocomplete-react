@@ -47,6 +47,7 @@ export const usePlaceKit = (apiKey, options) => {
 
       return () => {
         pka.destroy();
+        setClient();
       };
     },
     [apiKey, options, target]
