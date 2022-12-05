@@ -115,6 +115,8 @@ A few additional notes:
 - Don't pass a destructured object into `usePlaceKit` second argument (options), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
 - `isFreeForm` and `hasGeolocation` are separately set inside the hook, as `client.isFreeForm` and `client.hasGeolocation` are stateless.
 
+⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact)
+
 ## ⚖️ License
 
-PlaceKit Autocomplete is an open-sourced software licensed under the [MIT license](./LICENSE).
+PlaceKit Autocomplete React Library is an open-sourced software licensed under the [MIT license](./LICENSE).
