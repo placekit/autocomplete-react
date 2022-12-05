@@ -72,8 +72,8 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onResults={(query, results) => {}}
   onPick={(value, item, index) => {}}
   onError={(error) => {}}
-  onGeolocation={(isFreeForm) => {}}
-  onFreeForm={(hasGeolocation, position) => {}}
+  onFreeForm={(isFreeForm) => {}}
+  onGeolocation={(hasGeolocation, position) => {}}
 
   // and any other property will be forwared to the <input> element
   id="my-input"
@@ -112,7 +112,7 @@ Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocompl
 A few additional notes:
 - `target` is a React `ref` object.
 - The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case).
-- Don't pass a destructured object as `usePlaceKit` options (second argument), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
+- Don't pass a destructured object into `usePlaceKit` second argument (options), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
 - `isFreeForm` and `hasGeolocation` are separately set inside the hook, as `client.isFreeForm` and `client.hasGeolocation` are stateless.
 
 ## ⚖️ License
