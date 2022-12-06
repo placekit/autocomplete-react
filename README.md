@@ -6,6 +6,13 @@
   <b>All-in-one autocomplete experience for your React web apps</b>
 </p>
 
+<div align="center">
+
+  [![NPM](https://img.shields.io/npm/v/@placekit/autocomplete-react?style=flat-square)](https://www.npmjs.com/package/@placekit/autocomplete-react?activeTab=readme)
+  [![LICENSE](https://img.shields.io/github/license/placekit/autocomplete-react?style=flat-square)](./LICENSE)
+  
+</div>
+
 <p align="center">
   <a href="#-quick-start">Quick start</a> • 
   <a href="#-component-properties">Component properties</a> • 
