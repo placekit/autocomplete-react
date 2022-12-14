@@ -1,11 +1,11 @@
-import path from 'path';
+const path = require('path');
 
-import { babel } from '@rollup/plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import copy from 'rollup-plugin-copy';
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const copy = require('rollup-plugin-copy');
 
-import pkg from './package.json' assert { type: "json" };
+const pkg = require('./package.json');
 const banner = [
   `/*! ${pkg.name} v${pkg.version}`,
   '© placekit.io',
@@ -13,7 +13,7 @@ const banner = [
   `${pkg.homepage} */`,
 ].join(' | ');
 
-export default {
+module.exports = {
   input: 'src/index.js',
   output: [
     {

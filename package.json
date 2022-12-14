@@ -1,6 +1,6 @@
 {
   "name": "@placekit/autocomplete-react",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "author": "PlaceKit <support@placekit.io>",
   "description": "PlaceKit Autocomplete React library",
   "license": "MIT",
@@ -12,7 +12,6 @@
   "bugs": {
     "url": "https://github.com/placekit/autocomplete-react/issues"
   },
-  "type": "module",
   "types": "./dist/placekit-autocomplete.d.ts",
   "module": "./dist/placekit-autocomplete.esm.js",
   "main": "./dist/placekit-autocomplete.cjs.js",
@@ -54,7 +53,7 @@
     "rollup-plugin-copy": "^3.4.0"
   },
   "dependencies": {
-    "@placekit/autocomplete-js": "^1.0.0-alpha.3",
+    "@placekit/autocomplete-js": "^1.0.0-alpha.4",
     "@types/react": "^18.0.26",
     "prop-types": "^15.8.1"
   },
