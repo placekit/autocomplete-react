@@ -41,7 +41,6 @@ const PlaceKit = forwardRef(({
       onError,
       onGeolocation,
       onFreeForm,
-      ref
     ]
   );
   
@@ -49,7 +48,7 @@ const PlaceKit = forwardRef(({
 
   useEffect(
     () => {
-      if (target.current && typeof ref !== 'undefined') {
+      if (target.current && ref) {
         if (typeof ref === 'function') {
           ref(target.current);
         } else {
