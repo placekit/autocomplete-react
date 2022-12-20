@@ -65,6 +65,9 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
     offset: 4,
     template: (item, index) => {},
     formatValue: (item) => {},
+    strategy: 'absolute',
+    flip: false,
+    className: 'panel-custom-class',
     timeout: 5000,
     maxResults: 5,
     types: ['city'],
@@ -82,7 +85,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onFreeForm={(isFreeForm) => {}}
   onGeolocation={(hasGeolocation, position) => {}}
 
-  // and any other property will be forwared to the <input> element
+  // and other native properties will be forwared to the <input> element
   id="my-input"
   name="address"
   placeholder="Search places..."
