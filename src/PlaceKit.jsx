@@ -68,6 +68,7 @@ const PlaceKit = forwardRef(({
     >
       {!!useGeolocation && (
         <button
+          type="button"
           className={[
             'pka-input-geolocation',
             hasGeolocation ? 'pka-enabled' : '',
@@ -82,6 +83,7 @@ const PlaceKit = forwardRef(({
         </button>
       )}
       <button
+        type="button"
         className="pka-input-clear"
         title="Clear value"
         aria-hidden={!target.current?.value}
