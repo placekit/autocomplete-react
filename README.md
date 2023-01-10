@@ -52,6 +52,8 @@ export default MyComponent;
 Also, import default style from `@placekit/autocomplete-js/dist/placekit-autocomplete.css` (`@placekit/autocomplete-js` is set as a dependency of this package and will automatically be installed). It will style the suggestions list and the input.
 If you have trouble importing CSS from `node_modules`, copy/paste [its content](https://github.com/placekit/autocomplete-js/blob/main/src/placekit.css) into your own CSS.
 
+👉 **Check out our [examples](./examples) for different use cases!**
+
 ## ⚙️ Component properties
 
 ```jsx
