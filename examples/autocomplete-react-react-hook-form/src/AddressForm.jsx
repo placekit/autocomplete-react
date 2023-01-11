@@ -1,32 +1,25 @@
 import { PlaceKit } from '@placekit/autocomplete-react';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 
 import FormField from './FormField';
 
 const AddressForm = () => {
-  const [values, setValues] = useState({});
-  
-  const updateValue = useCallback(
-    (e) => {
-      setValues((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value,
-      }));
+  const methods = useForm({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+  });
+
+  const onSubmit = useCallback(
+    (values) => {
+      alert(JSON.stringify(values, null, 2));
     },
     []
   );
 
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      alert(JSON.stringify(values, null, 2));
-    },
-    [values]
-  );
-
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={methods.handleSubmit(onSubmit)}
       className="p-8 grid grid-cols-2 gap-4 items-end rounded-lg bg-white border border-slate-200"
     >
       <header className="col-span-full mb-2">
@@ -42,33 +35,32 @@ const AddressForm = () => {
         <PlaceKit
           name="address"
           apiKey={process.env.PLACEKIT_API_KEY}
-          onPick={(_, item) => {
-            setValues({
-              city: item.city,
-              zipcode: item.zipcode[0],
-              country: item.country,
-            });
+          onPick={(_,  item) => {
+            methods.setValue('address', item.name);
+            methods.setValue('city', item.city);
+            if (item.zipcode[0]) {
+              methods.setValue('zipcode', item.zipcode[0]);
+            }
+            methods.setValue('country', item.country);
           }}
+          {...methods.register('address')}
         />
       </div>
       <FormField
         name="city"
         label="City"
-        value={values.city}
-        onChange={updateValue}
+        {...methods.register('city')}
         className="col-span-full"
       />
       <FormField
         name="zipcode"
         label="Post code"
-        value={values.zipcode}
-        onChange={updateValue}
+        {...methods.register('zipcode')}
       />
       <FormField
         name="country"
         label="Country"
-        value={values.country}
-        onChange={updateValue}
+        {...methods.register('country')}
       />
       <div className="col-span-full mt-5 grid">
         <button
