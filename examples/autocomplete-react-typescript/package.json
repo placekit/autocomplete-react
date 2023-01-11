@@ -10,7 +10,7 @@
     "process": "^0.11.10"
   },
   "dependencies": {
-    "@placekit/autocomplete-react": "^1.0.0-alpha.7",
+    "@placekit/autocomplete-react": "file:../../",
     "@tailwindcss/forms": "^0.5.3",
     "clsx": "^1.2.1",
     "prop-types": "^15.8.1",
