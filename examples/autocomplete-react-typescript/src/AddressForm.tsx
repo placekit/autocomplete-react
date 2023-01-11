@@ -3,11 +3,18 @@ import { useCallback, useState } from 'react';
 
 import FormField from './FormField';
 
+type IAddressFields = {
+  address?: string;
+  city?: string;
+  zipcode?: string;
+  country?: string;
+};
+
 const AddressForm = () => {
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState<IAddressFields>({});
   
   const updateValue = useCallback(
-    (e) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       setValues((prev) => ({
         ...prev,
         [e.target.name]: e.target.value,
@@ -17,7 +24,7 @@ const AddressForm = () => {
   );
 
   const handleSubmit = useCallback(
-    (e) => {
+    (e: React.FormEvent) => {
       e.preventDefault();
       alert(JSON.stringify(values, null, 2));
     },
@@ -41,7 +48,7 @@ const AddressForm = () => {
         </label>
         <PlaceKit
           name="address"
-          apiKey={process.env.PLACEKIT_API_KEY}
+          apiKey={`${process.env.PLACEKIT_API_KEY}`}
           onPick={(value, item) => {
             setValues({
               address: value,

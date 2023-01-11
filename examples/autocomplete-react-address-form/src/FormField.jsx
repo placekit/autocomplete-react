@@ -30,6 +30,6 @@ FormField.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string,
   className: PropTypes.string,
-}
+};
 
 export default FormField;

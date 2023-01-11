@@ -1,6 +1,6 @@
-# React Hook Form example
+# TypeScript form example
 
-This example shows how to fill a complete address form from the autocomplete selection in React using [React Hook Form](https://react-hook-form.com).
+This example shows how to fill a complete address form from the autocomplete selection in React and TypeScript without any third-party form library.
 
 Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic styling of the example.
 

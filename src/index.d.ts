@@ -15,7 +15,7 @@ export type PlaceKitProps = {
   useGeolocation?: boolean;
   className?: string;
   options?: Omit<PKAOptions, 'target'>;
-} & Partial<Handlers>;
+} & Partial<Handlers> & React.HTMLProps<HTMLInputElement>;
 
 export type PlaceKitOptions = Omit<PKAOptions, 'target'> & {
   handlers?: Partial<Handlers>;
