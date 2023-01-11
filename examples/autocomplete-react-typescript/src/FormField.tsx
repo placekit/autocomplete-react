@@ -1,11 +1,16 @@
-import PropTypes from 'prop-types';
 import { forwardRef, useId } from 'react';
 
-const FormField = forwardRef(({
-  className,
-  label,
-  ...inputProps
-}, ref) => {
+type IFormFieldProps = {
+  label: string;
+  id?: string;
+  className?: string;
+  [key: string]: any;
+};
+
+const FormField = forwardRef((
+  { className, label, ...inputProps }: IFormFieldProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) => {
   const id = inputProps.id || useId();
   return (
     <div className={className}>
@@ -24,12 +29,5 @@ const FormField = forwardRef(({
     </div>
   );
 });
-
-FormField.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  id: PropTypes.string,
-  className: PropTypes.string,
-}
 
 export default FormField;
