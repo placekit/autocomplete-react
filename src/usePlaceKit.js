@@ -12,8 +12,11 @@ export const usePlaceKit = (apiKey, options) => {
 
   const target = useRef(null);
   const [client, setClient] = useState();
-  const [isFreeForm, setIsFreeForm] = useState(true);
-  const [hasGeolocation, setHasGeolocation] = useState(false);
+  const [state, setState] = useState({
+    isEmpty: true,
+    isFreeForm: true,
+    hasGeolocation: false,
+  });
 
   useEffect(
     () => {
@@ -31,16 +34,31 @@ export const usePlaceKit = (apiKey, options) => {
         .on('results', handlers?.onResults)
         .on('pick', handlers?.onPick)
         .on('error', handlers?.onError)
-        .on('geolocation', (bool, pos) => {
-          setHasGeolocation(bool);
-          if (handlers?.onGeolocation) {
-            handlers.onGeolocation(bool, pos);
+        .on('empty', (bool) => {
+          setState((prev) => ({
+            ...prev,
+            isEmpty: bool,
+          }));
+          if (handlers?.onEmpty) {
+            handlers.onEmpty(bool);
           }
         })
         .on('freeForm', (bool) => {
-          setIsFreeForm(bool);
+          setState((prev) => ({
+            ...prev,
+            isFreeForm: bool,
+          }));
           if (handlers?.onFreeForm) {
             handlers.onFreeForm(bool);
+          }
+        })
+        .on('geolocation', (bool, pos) => {
+          setState((prev) => ({
+            ...prev,
+            hasGeolocation: bool,
+          }));
+          if (handlers?.onGeolocation) {
+            handlers.onGeolocation(bool, pos);
           }
         });
       setClient(pka);
@@ -56,7 +74,6 @@ export const usePlaceKit = (apiKey, options) => {
   return {
     target,
     client,
-    isFreeForm,
-    hasGeolocation,
+    state,
   };
 };
