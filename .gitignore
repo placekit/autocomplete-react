@@ -2,8 +2,8 @@
 
 # misc
 .DS_Store
-/NOTES.md
 /demo
+/NOTES.md
 /publish.sh
 
 # dependencies

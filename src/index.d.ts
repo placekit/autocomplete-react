@@ -6,6 +6,7 @@ type Handlers = {
   onResults: PKAHandlers['results'];
   onPick: PKAHandlers['pick'];
   onError: PKAHandlers['error'];
+  onEmpty: PKAHandlers['empty'];
   onFreeForm: PKAHandlers['freeForm'];
   onGeolocation: PKAHandlers['geolocation'];
 };
@@ -22,10 +23,13 @@ export type PlaceKitOptions = Omit<PKAOptions, 'target'> & {
 };
 
 export type PlaceKitHooks = {
-  target: React.RefObject<HTMLInputElement>,
-  client: PKAClient,
-  isFreeForm: boolean;
-  hasGeolocation: boolean;
+  target: React.RefObject<HTMLInputElement>;
+  client: PKAClient;
+  state: {
+    isEmpty: boolean;
+    isFreeForm: boolean;
+    hasGeolocation: boolean;
+  };
 };
 
 declare function PlaceKit(props: PlaceKitProps): JSX.Element;

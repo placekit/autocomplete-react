@@ -44,7 +44,7 @@ const PlaceKit = forwardRef(({
     ]
   );
   
-  const { target, client, hasGeolocation } = usePlaceKit(apiKey, opts);
+  const { target, client, state } = usePlaceKit(apiKey, opts);
 
   useEffect(
     () => {
@@ -71,11 +71,11 @@ const PlaceKit = forwardRef(({
           type="button"
           className={[
             'pka-input-geolocation',
-            hasGeolocation ? 'pka-enabled' : '',
+            state.hasGeolocation ? 'pka-enabled' : '',
           ].filter((c) => c).join(' ')}
           title="Activate geolocation"
           role="switch"
-          aria-checked={hasGeolocation}
+          aria-checked={state.hasGeolocation}
           onClick={client?.requestGeolocation}
           disabled={inputProps.disabled}
         >
@@ -86,7 +86,7 @@ const PlaceKit = forwardRef(({
         type="button"
         className="pka-input-clear"
         title="Clear value"
-        aria-hidden={!target.current?.value}
+        aria-hidden={state.isEmpty}
         onClick={client?.clear}
         disabled={inputProps.disabled}
       >
@@ -130,8 +130,9 @@ PlaceKit.propTypes = {
   onResults: PropTypes.func,
   onPick: PropTypes.func,
   onError: PropTypes.func,
-  onGeolocation: PropTypes.func,
+  onEmpty: PropTypes.func,
   onFreeForm: PropTypes.func,
+  onGeolocation: PropTypes.func,
 };
 
 export default PlaceKit;

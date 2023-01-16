@@ -84,6 +84,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onResults={(query, results) => {}}
   onPick={(value, item, index) => {}}
   onError={(error) => {}}
+  onEmpty={(isEmpty) => {}}
   onFreeForm={(isFreeForm) => {}}
   onGeolocation={(hasGeolocation, position) => {}}
 
@@ -111,7 +112,7 @@ If our component doesn't suit your needs, you can build your own using the provi
 import { usePlaceKit } from '@placekit/autocomplete-react';
 
 const MyComponent = (props) => {
-  const { target, client, isFreeForm, hasGeolocation } = usePlaceKit('<your-api-key>', {});
+  const { target, client, state } = usePlaceKit('<your-api-key>', {});
 
   return (
     <input ref={target} />
@@ -125,7 +126,7 @@ A few additional notes:
 - `target` is a React `ref` object.
 - The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case).
 - Don't pass a destructured object into `usePlaceKit` second argument (options), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
-- `isFreeForm` and `hasGeolocation` are separately set inside the hook, as `client.isFreeForm` and `client.hasGeolocation` are stateless.
+- `state` exposes stateless client properties (`isEmpty`, `isFreeForm` and `hasGeolocation`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact)
 
