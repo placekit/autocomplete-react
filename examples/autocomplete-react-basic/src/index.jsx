@@ -9,6 +9,9 @@ const App = () => (
   <div className="flex justify-center">
     <PlaceKit
       apiKey={process.env.PLACEKIT_API_KEY}
+      options={{
+        countries: ['fr'],
+      }}
       className="w-96"
     />
   </div>

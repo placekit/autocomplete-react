@@ -42,12 +42,19 @@ import { PlaceKit } from '@placekit/autocomplete-react';
 
 const MyComponent = (props) => {
   return (
-    <PlaceKit apiKey="<your-api-key>" />
+    <PlaceKit
+      apiKey="<your-api-key>"
+      options={{
+        countries: ['fr']
+      }}
+    />
   );
 };
 
 export default MyComponent;
 ```
+
+**Important**: the `countries` option is **required** at search time, but we like to keep it optional across all methods so developers remain free on when and how to define it.
 
 Also, import default style from `@placekit/autocomplete-js/dist/placekit-autocomplete.css` (`@placekit/autocomplete-js` is set as a dependency of this package and will automatically be installed). It will style the suggestions list and the input.
 If you have trouble importing CSS from `node_modules`, copy/paste [its content](https://github.com/placekit/autocomplete-js/blob/main/src/placekit.css) into your own CSS.
@@ -112,7 +119,9 @@ If our component doesn't suit your needs, you can build your own using the provi
 import { usePlaceKit } from '@placekit/autocomplete-react';
 
 const MyComponent = (props) => {
-  const { target, client, state } = usePlaceKit('<your-api-key>', {});
+  const { target, client, state } = usePlaceKit('<your-api-key>', {
+    countries: ['fr'],
+  });
 
   return (
     <input ref={target} />

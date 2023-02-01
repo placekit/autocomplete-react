@@ -21,6 +21,9 @@ const Map = () => {
       <div className="absolute top-2 left-2 w-96 z-[500]">
         <PlaceKit
           apiKey={process.env.PLACEKIT_API_KEY}
+          options={{
+            countries: ['fr'],
+          }}
           onPick={(_, item) => setCoords({
             lat: item.lat,
             lng: item.lng,

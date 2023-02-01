@@ -42,6 +42,9 @@ const AddressForm = () => {
         <PlaceKit
           name="address"
           apiKey={process.env.PLACEKIT_API_KEY}
+          options={{
+            countries: ['fr'],
+          }}
           onPick={(value, item) => {
             setValues({
               address: value,
