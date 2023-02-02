@@ -11,7 +11,7 @@ const App = () => (
     <PlaceKit
       apiKey={process.env.PLACEKIT_API_KEY}
       options={{
-        countries: tzc(),
+        countries: [tzc()], // get country code from user's timezone
       }}
       className="w-96"
     />

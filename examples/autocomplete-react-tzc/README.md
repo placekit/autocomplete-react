@@ -2,7 +2,7 @@
 
 Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic styling of the example.
 
-Adding [Time Zone Countries](https://github.com/placekit/tzc) package to populate `countries` options based on user's timezone.
+Adding [Time Zone Country](https://github.com/placekit/tzc) package to populate `countries` options based on user's timezone.
 
 ## Run
 
