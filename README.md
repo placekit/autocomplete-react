@@ -54,7 +54,7 @@ const MyComponent = (props) => {
 export default MyComponent;
 ```
 
-**Important**: the `countries` option is **required** at search time, but we like to keep it optional across all methods so developers remain free on when and how to define it. If you don't know ahead of time which country your users will search addresses in, consider using our package [Time Zone Country](https://github.com/placekit/tzc).
+**Important**: the `countries` option is **required** at search time, but we like to keep it optional across all methods so developers remain free on when and how to define it.
 
 Also, import default style from `@placekit/autocomplete-js/dist/placekit-autocomplete.css` (`@placekit/autocomplete-js` is set as a dependency of this package and will automatically be installed). It will style the suggestions list and the input.
 If you have trouble importing CSS from `node_modules`, copy/paste [its content](https://github.com/placekit/autocomplete-js/blob/main/src/placekit.css) into your own CSS.
