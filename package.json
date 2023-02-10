@@ -15,7 +15,6 @@
   "types": "./dist/placekit-react.d.ts",
   "module": "./dist/placekit-react.esm.mjs",
   "main": "./dist/placekit-react.cjs.js",
-  "browser": "./dist/placekit-react.umd.js",
   "exports": {
     ".": {
       "types": "./dist/placekit-react.d.ts",

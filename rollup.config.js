@@ -27,12 +27,6 @@ module.exports = {
       exports: 'auto',
       banner,
     },
-    {
-      file: pkg.browser,
-      format: 'umd',
-      name: 'placekitReact',
-      banner,
-    },
   ],
   external: [/node_modules/],
   plugins: [
