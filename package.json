@@ -13,13 +13,13 @@
     "url": "https://github.com/placekit/autocomplete-react/issues"
   },
   "types": "./dist/placekit-autocomplete.d.ts",
-  "module": "./dist/placekit-autocomplete.esm.js",
+  "module": "./dist/placekit-autocomplete.esm.mjs",
   "main": "./dist/placekit-autocomplete.cjs.js",
   "exports": {
     ".": {
       "types": "./dist/placekit-autocomplete.d.ts",
       "require": "./dist/placekit-autocomplete.cjs.js",
-      "import": "./dist/placekit-autocomplete.esm.js"
+      "import": "./dist/placekit-autocomplete.esm.mjs"
     }
   },
   "files": [
