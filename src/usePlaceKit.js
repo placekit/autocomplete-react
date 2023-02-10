@@ -1,4 +1,4 @@
-import placekit from '@placekit/autocomplete-js';
+import placekitAutocomplete from '@placekit/autocomplete-js';
 import { useEffect, useRef, useState } from 'react';
 
 export const usePlaceKit = (apiKey, options) => {
@@ -25,7 +25,7 @@ export const usePlaceKit = (apiKey, options) => {
       }
 
       const { handlers, ...opts } = options || {};
-      const pka = placekit(apiKey, {
+      const pka = placekitAutocomplete(apiKey, {
         target: target.current,
         ...opts,
       })

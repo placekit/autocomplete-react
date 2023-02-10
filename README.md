@@ -81,6 +81,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
     maxResults: 5,
     types: ['city'],
     language: 'fr',
+    countryByIP: false,
     countries: ['fr'],
     coordinates: '48.86,2.29',
   }}
