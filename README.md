@@ -17,7 +17,6 @@
   <a href="#-quick-start">Quick start</a> • 
   <a href="#-component-properties">Component properties</a> • 
   <a href="#-custom-hook">Custom hook</a> • 
-  <a href="https://placekit.io/developers">Documentation</a> • 
   <a href="#%EF%B8%8F-license">License</a>
 </p>
 
@@ -138,7 +137,7 @@ A few additional notes:
 - Don't pass a destructured object into `usePlaceKit` second argument (options), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
 - `state` exposes stateless client properties (`isEmpty`, `isFreeForm` and `hasGeolocation`) as stateful ones.
 
-⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact)
+⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
 
 ## ⚖️ License
 
