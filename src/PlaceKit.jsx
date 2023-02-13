@@ -122,6 +122,7 @@ PlaceKit.propTypes = {
     maxResults: PropTypes.number,
     types: PropTypes.arrayOf(PropTypes.string),
     language: PropTypes.string,
+    countryByIP: PropTypes.bool,
     countries: PropTypes.arrayOf(PropTypes.string),
     coordinates: PropTypes.string,
   }),
