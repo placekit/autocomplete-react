@@ -9,7 +9,7 @@ Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic
 ```sh
 # clone project and access this example
 git clone git@github.com:placekit/autocomplete-react.git
-cd client-js/examples/basic
+cd autocomplete-react/examples/autocomplete-react-react-hook-form
 
 # install dependencies
 npm install

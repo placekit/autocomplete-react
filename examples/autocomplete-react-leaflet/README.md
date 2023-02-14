@@ -10,7 +10,7 @@ Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic
 ```sh
 # clone project and access this example
 git clone git@github.com:placekit/autocomplete-react.git
-cd client-js/examples/map-leaflet
+cd autocomplete-react/examples/autocomplete-react-leaflet
 
 # install dependencies
 npm install
