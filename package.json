@@ -1,6 +1,6 @@
 {
   "name": "@placekit/autocomplete-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "PlaceKit <support@placekit.io>",
   "description": "PlaceKit Autocomplete React library",
   "license": "MIT",
@@ -44,17 +44,17 @@
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
-    "eslint": "^8.36.0",
+    "eslint": "^8.37.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.32.2",
     "npm-watch": "^0.11.0",
-    "rimraf": "^4.4.0",
-    "rollup": "^3.20.0",
+    "rimraf": "^4.4.1",
+    "rollup": "^3.20.2",
     "rollup-plugin-copy": "^3.4.0"
   },
   "dependencies": {
-    "@placekit/autocomplete-js": "^1.0.0",
-    "@types/react": "^18.0.28",
+    "@placekit/autocomplete-js": "^1.0.1",
+    "@types/react": "^18.0.31",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
