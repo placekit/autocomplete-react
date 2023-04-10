@@ -73,6 +73,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
     offset: 4,
     template: (item, index) => {},
     formatValue: (item) => {},
+    noResults: '',
     strategy: 'absolute',
     flip: false,
     className: 'panel-custom-class',
