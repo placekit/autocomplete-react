@@ -14,6 +14,7 @@ const PlaceKit = forwardRef(({
   onPick,
   onError,
   onGeolocation,
+  onEmpty,
   onFreeForm,
   ...inputProps
 }, ref) => {
@@ -29,6 +30,7 @@ const PlaceKit = forwardRef(({
       output.handlers.onPick = onPick;
       output.handlers.onError = onError;
       output.handlers.onGeolocation = onGeolocation;
+      output.handlers.onEmpty = onEmpty;
       output.handlers.onFreeForm = onFreeForm;
       return output;
     },
