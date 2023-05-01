@@ -48,7 +48,7 @@ const AddressForm = () => {
         </label>
         <PlaceKit
           name="address"
-          apiKey={`${process.env.PLACEKIT_API_KEY}`}
+          apiKey={`${import.meta.env.VITE_PLACEKIT_API_KEY}`}
           options={{
             countries: ['fr'],
           }}
