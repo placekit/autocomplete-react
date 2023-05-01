@@ -1,5 +1,7 @@
 # React Hook Form example
 
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)](https://githubbox.com/placekit/autocomplete-react/tree/main/examples/autocomplete-react-react-hook-form)
+
 This example shows how to fill a complete address form from the autocomplete selection in React using [React Hook Form](https://react-hook-form.com).
 
 Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic styling of the example.
@@ -23,7 +25,7 @@ Open the `.env` file and replace `<your-api-key>` with your PlaceKit API key.
 Then run:
 
 ```sh
-npm start
+npm run dev
 ```
 
-And your project will be served at http://localhost:1234.
+And your project will be served at http://localhost:5173.
