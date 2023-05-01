@@ -1,6 +1,9 @@
-# PlaceKit Autocomplete React basic example
+# Address form example
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)](https://githubbox.com/placekit/autocomplete-react/tree/main/examples/autocomplete-react-basic)
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)](https://githubbox.com/placekit/autocomplete-react/tree/main/examples/autocomplete-react-address-form)
+
+This example shows how to fill a complete address form from the autocomplete selection in React without any third-party form library.
+Have a look at our [`react-hook-form` example](../react-hook-form/) if you prefer using a form library.
 
 Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic styling of the example.
 
@@ -9,7 +12,7 @@ Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic
 ```sh
 # clone project and access this example
 git clone git@github.com:placekit/autocomplete-react.git
-cd autocomplete-react/examples/autocomplete-react-basic
+cd autocomplete-react/examples/autocomplete-react-address-form
 
 # install dependencies
 npm install

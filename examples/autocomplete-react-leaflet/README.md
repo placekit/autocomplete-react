@@ -1,6 +1,9 @@
-# PlaceKit Autocomplete React basic example
+# Leaflet integration example
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)](https://githubbox.com/placekit/autocomplete-react/tree/main/examples/autocomplete-react-basic)
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)](https://githubbox.com/placekit/autocomplete-react/tree/main/examples/autocomplete-react-leaflet)
+
+[LeafletJS](https://leafletjs.com) is an open-source JavaScript library for interactive maps.
+This example uses the official [Leaflet React library](https://react-leaflet.js.org).
 
 Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic styling of the example.
 
@@ -9,7 +12,7 @@ Only using [TailwindCSS](https://tailwindcss.com) as a convenience for the basic
 ```sh
 # clone project and access this example
 git clone git@github.com:placekit/autocomplete-react.git
-cd autocomplete-react/examples/autocomplete-react-basic
+cd autocomplete-react/examples/autocomplete-react-leaflet
 
 # install dependencies
 npm install
