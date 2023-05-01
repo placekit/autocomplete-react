@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { PlaceKit } from '@placekit/autocomplete-react';
 
-const Map = () => {
+const App = () => {
   const map = useRef(null);
   const [coords, setCoords] = useState(null);
 
@@ -20,7 +20,7 @@ const Map = () => {
     <div className="relative w-[600px]">
       <div className="absolute top-2 left-2 w-96 z-[500]">
         <PlaceKit
-          apiKey={process.env.PLACEKIT_API_KEY}
+          apiKey={import.meta.env.VITE_PLACEKIT_API_KEY}
           options={{
             countries: ['fr'],
           }}
@@ -57,4 +57,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default App;
