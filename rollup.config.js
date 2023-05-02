@@ -35,8 +35,6 @@ module.exports = {
       extensions: ['.js', '.jsx'],
     }),
     babel({
-      babelHelpers: 'runtime',
-      plugins: ['@babel/plugin-transform-runtime'],
       presets: ['@babel/preset-react'],
     }),
     commonjs(),
