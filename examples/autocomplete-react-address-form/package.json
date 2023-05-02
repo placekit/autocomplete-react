@@ -7,7 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@placekit/autocomplete-react": "^1.1.1",
+    "@placekit/autocomplete-react": "^1.1.2",
     "@tailwindcss/forms": "^0.5.3",
     "clsx": "^1.2.1",
     "prop-types": "^15.8.1",
