@@ -4,15 +4,20 @@ import { useCallback, useState } from 'react';
 import FormField from './FormField';
 
 type IAddressFields = {
-  address?: string;
-  city?: string;
-  zipcode?: string;
-  country?: string;
+  address: string;
+  city: string;
+  zipcode: string;
+  country: string;
 };
 
 const AddressForm = () => {
-  const [values, setValues] = useState<IAddressFields>({});
-  
+  const [values, setValues] = useState<IAddressFields>({
+    address: '',
+    city: '',
+    zipcode: '',
+    country: '',
+  });
+
   const updateValue = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setValues((prev) => ({
