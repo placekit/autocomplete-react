@@ -36,6 +36,7 @@ module.exports = {
     }),
     babel({
       presets: ['@babel/preset-react'],
+      babelHelpers: 'bundled',
     }),
     commonjs(),
     copy({
