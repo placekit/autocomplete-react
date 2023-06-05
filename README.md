@@ -17,6 +17,7 @@
   <a href="#-quick-start">Quick start</a> • 
   <a href="#-component-properties">Component properties</a> • 
   <a href="#-custom-hook">Custom hook</a> • 
+  <a href="#-troubleshoot">Troubleshoot</a> • 
   <a href="#%EF%B8%8F-license">License</a>
 </p>
 
@@ -139,6 +140,56 @@ A few additional notes:
 - `state` exposes stateless client properties (`isEmpty`, `isFreeForm` and `hasGeolocation`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
+
+## 🚒 Troubleshoot
+
+When `<PlaceKit>` is used within a component using states, re-renders propagate, causing the PlaceKit client to reset and flush the suggestions list.
+
+In this example, when the user picks an address from the suggestions, `address` is being set and causes `MyComponent` to rerender in full.
+
+```jsx
+const MyComponent = () => {
+  const [address, setAddress] = useState();
+  return (
+    <div>
+      <PlaceKit
+        apiKey="<your-api-key>"
+        options={{
+          countries: ['fr'],
+        }}
+        onPick={(value) => setAddress(value)}
+      />
+      <pre>
+        {address}
+      </pre>
+    </div>
+  );
+};
+```
+
+To avoid this, wrap the `<PlaceKit>` with `useMemo`:
+
+```jsx
+const MyComponent = () => {
+  const [address, setAddress] = useState();
+  return (
+    <div>
+      {useMemo(() => (
+        <PlaceKit
+          apiKey="<your-api-key>"
+          options={{
+            countries: ['fr'],
+          }}
+          onPick={(value) => setAddress(value)}
+        />
+      ), [])}
+      <pre>
+        {address}
+      </pre>
+    </div>
+  );
+};
+```
 
 ## ⚖️ License
 
