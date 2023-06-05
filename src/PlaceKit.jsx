@@ -20,10 +20,10 @@ const PlaceKit = forwardRef(({
 }, ref) => {
   const opts = useMemo(
     () => {
-      const output = options;
-      if (!output.handlers) {
-        output.handlers = {};
-      }
+      const output = {
+        handlers: {},
+        ...options
+      };
       output.handlers.onOpen = onOpen;
       output.handlers.onClose = onClose;
       output.handlers.onResults = onResults;

@@ -68,7 +68,7 @@ export const usePlaceKit = (apiKey, options) => {
         setClient();
       };
     },
-    [apiKey, options, target]
+    [apiKey, options, target.current]
   );
 
   return {
