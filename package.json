@@ -54,7 +54,6 @@
   "dependencies": {
     "@placekit/autocomplete-js": "^1.1.5",
     "@types/react": "^18.2.8",
-    "map-props": "^1.0.0",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
