@@ -5,7 +5,7 @@ import { useStableValue } from './useStableValue';
 
 export const usePlaceKit = (apiKey, options = {}) => {
   const stableOptions = useStableValue(options);
-  
+
   if (
     !['object', 'undefined'].includes(typeof stableOptions) ||
     Array.isArray(stableOptions) ||
@@ -21,7 +21,7 @@ export const usePlaceKit = (apiKey, options = {}) => {
     isFreeForm: true,
     hasGeolocation: false,
   });
-  
+
   useEffect(
     () => {
       if (!target.current) {
