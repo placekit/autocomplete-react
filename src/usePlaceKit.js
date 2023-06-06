@@ -1,11 +1,15 @@
 import placekitAutocomplete from '@placekit/autocomplete-js';
 import { useEffect, useRef, useState } from 'react';
 
-export const usePlaceKit = (apiKey, options) => {
+import { useStableValue } from './useStableValue';
+
+export const usePlaceKit = (apiKey, options = {}) => {
+  const stableOptions = useStableValue(options);
+  
   if (
-    !['object', 'undefined'].includes(typeof options) ||
-    Array.isArray(options) ||
-    options === null
+    !['object', 'undefined'].includes(typeof stableOptions) ||
+    Array.isArray(stableOptions) ||
+    stableOptions === null
   ) {
     throw Error('PlaceKit: `options` parameter is invalid, expected an object.');
   }
@@ -24,7 +28,7 @@ export const usePlaceKit = (apiKey, options) => {
         return;
       }
 
-      const { handlers, ...opts } = options || {};
+      const { handlers, ...opts } = stableOptions || {};
       const pka = placekitAutocomplete(apiKey, {
         target: target.current,
         ...opts,
@@ -68,7 +72,7 @@ export const usePlaceKit = (apiKey, options) => {
         setClient();
       };
     },
-    [apiKey, options, target.current]
+    [apiKey, stableOptions, target.current]
   );
 
   return {

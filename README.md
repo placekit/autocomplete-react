@@ -38,25 +38,20 @@ Then import the package and perform your first address search:
 
 ```jsx
 import { PlaceKit } from '@placekit/autocomplete-react';
-import { useMemo } from 'react';
 
 const MyComponent = (props) => {
-  const options = useMemo(() => ({
-    countries: ['fr']
-  }), []);
-  
   return (
     <PlaceKit
       apiKey="<your-api-key>"
-      options={options}
+      options={{
+        countries: ['fr']
+      }}
     />
   );
 };
 
 export default MyComponent;
 ```
-
-⚠️ Make sure you memoize options and handler functions with `useMemo` and `useCallback` to avoid unnecessary re-renders of the `<PlaceKit>` component, causing the PlaceKit client to remount, and the suggestions lists to flush.
 
 **Important**: the `countries` option is **required** at search time, but we like to keep it optional across all methods so developers remain free on when and how to define it.
 
@@ -92,7 +87,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
     coordinates: '48.86,2.29',
   }}
 
-  // event handlers
+  // event handlers (⚠️ use useCallback, see notes)
   onOpen={() => {}}
   onClose={() => {}}
   onResults={(query, results) => {}}
@@ -119,7 +114,7 @@ A few additional notes:
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.
-- Again, make sure you memoize options and handler functions with `useMemo` and `useCallback`.
+- ⚠️ Make sure you memoize handler functions with `useCallback`, otherwise the `<PlaceKit>` component will re-render each time the wrapping component re-renders, causing the PlaceKit client to remount, and the suggestions lists to flush.
 
 ## 🪝 Custom hook
 

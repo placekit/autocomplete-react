@@ -1,27 +1,22 @@
 import PropTypes from 'prop-types';
-import React, { forwardRef, memo, useEffect, useMemo } from 'react';
+import React, { forwardRef, memo, useEffect } from 'react';
 
 import { usePlaceKit } from './usePlaceKit';
 
 const PlaceKit = memo(forwardRef((props, ref) => {
-  const opts = useMemo(
-    () => ({
-      ...props.options,
-      handlers: {
-        onOpen: props.onOpen,
-        onClose: props.onClose,
-        onResults: props.onResults,
-        onPick: props.onPick,
-        onError: props.onError,
-        onGeolocation: props.onGeolocation,
-        onEmpty: props.onEmpty,
-        onFreeForm: props.onFreeForm,
-      },
-    }),
-    [props]
-  );
-  
-  const { target, client, state } = usePlaceKit(props.apiKey, opts);
+  const { target, client, state } = usePlaceKit(props.apiKey, {
+    ...props.options,
+    handlers: {
+      onOpen: props.onOpen,
+      onClose: props.onClose,
+      onResults: props.onResults,
+      onPick: props.onPick,
+      onError: props.onError,
+      onGeolocation: props.onGeolocation,
+      onEmpty: props.onEmpty,
+      onFreeForm: props.onFreeForm,
+    },
+  });
 
   useEffect(
     () => {
