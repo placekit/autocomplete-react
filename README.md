@@ -97,13 +97,12 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onFreeForm={(isFreeForm) => {}}
   onGeolocation={(hasGeolocation, position) => {}}
 
-  // native HTML input props
+  // other HTML input props get forwarded
   id="my-input"
   name="address"
   placeholder="Search places..."
   disabled={true}
-  required={true}
-  autoFocus={true}
+  // ...
 />
 ```
 
