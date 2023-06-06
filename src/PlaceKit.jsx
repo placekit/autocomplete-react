@@ -3,18 +3,36 @@ import React, { forwardRef, memo, useEffect } from 'react';
 
 import { usePlaceKit } from './usePlaceKit';
 
-const PlaceKit = memo(forwardRef((props, ref) => {
-  const { target, client, state } = usePlaceKit(props.apiKey, {
-    ...props.options,
+const PlaceKit = memo(forwardRef(({
+  apiKey,
+  className,
+  useGeolocation,
+  options,
+  onOpen,
+  onClose,
+  onResults,
+  onPick,
+  onError,
+  onDirty,
+  onEmpty,
+  onFreeForm,
+  onState,
+  onGeolocation,
+  ...inputProps
+}, ref) => {
+  const { target, client, state } = usePlaceKit(apiKey, {
+    ...options,
     handlers: {
-      onOpen: props.onOpen,
-      onClose: props.onClose,
-      onResults: props.onResults,
-      onPick: props.onPick,
-      onError: props.onError,
-      onGeolocation: props.onGeolocation,
-      onEmpty: props.onEmpty,
-      onFreeForm: props.onFreeForm,
+      onOpen,
+      onClose,
+      onResults,
+      onPick,
+      onError,
+      onDirty,
+      onEmpty,
+      onFreeForm,
+      onState,
+      onGeolocation,
     },
   });
 
@@ -28,17 +46,17 @@ const PlaceKit = memo(forwardRef((props, ref) => {
         }
       }
     },
-    [target]
+    [target.current]
   );
 
   return (
     <div
       className={[
         'pka-input',
-        props.className
+        className
       ].filter((c) => c).join(' ')}
     >
-      {!!props.useGeolocation && (
+      {!!useGeolocation && (
         <button
           type="button"
           className={[
@@ -49,7 +67,7 @@ const PlaceKit = memo(forwardRef((props, ref) => {
           role="switch"
           aria-checked={state.hasGeolocation}
           onClick={client?.requestGeolocation}
-          disabled={props.disabled}
+          disabled={inputProps.disabled}
         >
           <span className="pka-sr-only">Activate geolocation</span>
         </button>
@@ -60,19 +78,14 @@ const PlaceKit = memo(forwardRef((props, ref) => {
         title="Clear value"
         aria-hidden={state.isEmpty}
         onClick={client?.clear}
-        disabled={props.disabled}
+        disabled={inputProps.disabled}
       >
         <span className="pka-sr-only">Clear value</span>
       </button>
       <input
-        ref={target}
-        id={props.id}
-        name={props.name}
-        placeholder={props.placeholder}
-        disabled={props.disabled}
-        required={props.required}
-        autoFocus={props.autoFocus}
+        {...inputProps}
         type="search"
+        ref={target}
       />
     </div>
   );
@@ -113,17 +126,13 @@ PlaceKit.propTypes = {
   onResults: PropTypes.func,
   onPick: PropTypes.func,
   onError: PropTypes.func,
+  onDirty: PropTypes.func,
   onEmpty: PropTypes.func,
   onFreeForm: PropTypes.func,
+  onState: PropTypes.func,
   onGeolocation: PropTypes.func,
 
-  // native HTML input props
-  id: PropTypes.string,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
-  disabled: PropTypes.bool,
-  required: PropTypes.bool,
-  autoFocus: PropTypes.bool,
+  // other HTML input props get forwarded
 };
 
 export default PlaceKit;

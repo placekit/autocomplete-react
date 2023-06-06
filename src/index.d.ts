@@ -1,4 +1,4 @@
-import type { PKAClient, PKAHandlers, PKAOptions } from '@placekit/autocomplete-js';
+import type { PKAClient, PKAHandlers, PKAOptions, PKAState } from '@placekit/autocomplete-js';
 
 type Handlers = {
   onOpen: PKAHandlers['open'];
@@ -6,8 +6,10 @@ type Handlers = {
   onResults: PKAHandlers['results'];
   onPick: PKAHandlers['pick'];
   onError: PKAHandlers['error'];
+  onDirty: PKAHandlers['dirty'];
   onEmpty: PKAHandlers['empty'];
   onFreeForm: PKAHandlers['freeForm'];
+  onState: PKAHandlers['state'];
   onGeolocation: PKAHandlers['geolocation'];
 };
 
@@ -25,9 +27,7 @@ export type PlaceKitOptions = Omit<PKAOptions, 'target'> & {
 export type PlaceKitHooks = {
   target: React.RefObject<HTMLInputElement>;
   client: PKAClient;
-  state: {
-    isEmpty: boolean;
-    isFreeForm: boolean;
+  state: PKAState & {
     hasGeolocation: boolean;
   };
 };

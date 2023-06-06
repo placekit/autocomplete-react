@@ -93,28 +93,31 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onResults={(query, results) => {}}
   onPick={(value, item, index) => {}}
   onError={(error) => {}}
-  onEmpty={(isEmpty) => {}}
-  onFreeForm={(isFreeForm) => {}}
+  onDirty={(dirty) => {}}
+  onEmpty={(empty) => {}}
+  onFreeForm={(freeForm) => {}}
+  onState={(state) => {}}
   onGeolocation={(hasGeolocation, position) => {}}
 
-  // native HTML input props
+  // other HTML input props get forwarded
   id="my-input"
   name="address"
   placeholder="Search places..."
   disabled={true}
-  required={true}
-  autoFocus={true}
+  defaultValue="France"
+  // ...
 />
 ```
 
 Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js) documentation for more details about the options.
 
-A few additional notes:
+Some additional notes:
 - The `<input>` is using React `ref` attribute. It is therefore an [uncontrolled component](https://reactjs.org/docs/uncontrolled-components.html) and should be treated as such.
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.
 - ⚠️ Make sure you memoize handler functions with `useCallback`, otherwise the `<PlaceKit>` component will re-render each time the wrapping component re-renders, causing the PlaceKit client to remount, and the suggestions lists to flush.
+- ⚠️ Passing a non-empty value to `defaultValue` will automatically trigger a first search request when the user focuses the input.
 
 ## 🪝 Custom hook
 
@@ -140,7 +143,7 @@ A few additional notes:
 - `target` is a React `ref` object.
 - The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case).
 - Don't pass a destructured object into `usePlaceKit` second argument (options), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
-- `state` exposes stateless client properties (`isEmpty`, `isFreeForm` and `hasGeolocation`) as stateful ones.
+- `state` exposes stateless client properties (`dirty`, `empty`, `freeForm`, `hasGeolocation`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
 
