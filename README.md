@@ -141,7 +141,7 @@ A few additional notes:
 - `target` is a React `ref` object.
 - The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case).
 - Don't pass a destructured object into `usePlaceKit` second argument (options), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
-- `state` exposes stateless client properties (`isEmpty`, `isFreeForm` and `hasGeolocation`) as stateful ones.
+- `state` exposes stateless client properties (`dirty`, `empty`, `freeForm`, `hasGeolocation`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
 

@@ -13,9 +13,11 @@ const PlaceKit = memo(forwardRef(({
   onResults,
   onPick,
   onError,
-  onGeolocation,
+  onDirty,
   onEmpty,
   onFreeForm,
+  onState,
+  onGeolocation,
   ...inputProps
 }, ref) => {
   const { target, client, state } = usePlaceKit(apiKey, {
@@ -26,9 +28,11 @@ const PlaceKit = memo(forwardRef(({
       onResults,
       onPick,
       onError,
-      onGeolocation,
+      onDirty,
       onEmpty,
       onFreeForm,
+      onState,
+      onGeolocation,
     },
   });
 
@@ -122,8 +126,10 @@ PlaceKit.propTypes = {
   onResults: PropTypes.func,
   onPick: PropTypes.func,
   onError: PropTypes.func,
+  onDirty: PropTypes.func,
   onEmpty: PropTypes.func,
   onFreeForm: PropTypes.func,
+  onState: PropTypes.func,
   onGeolocation: PropTypes.func,
 
   // other HTML input props get forwarded
