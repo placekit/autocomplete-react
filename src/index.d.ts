@@ -6,7 +6,7 @@ type Handlers = {
   onResults: PKAHandlers['results'];
   onPick: PKAHandlers['pick'];
   onError: PKAHandlers['error'];
-  onDirty: PKAHandlers['onDirty'];
+  onDirty: PKAHandlers['dirty'];
   onEmpty: PKAHandlers['empty'];
   onFreeForm: PKAHandlers['freeForm'];
   onState: PKAHandlers['state'];
