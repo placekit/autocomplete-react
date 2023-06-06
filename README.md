@@ -93,8 +93,10 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onResults={(query, results) => {}}
   onPick={(value, item, index) => {}}
   onError={(error) => {}}
-  onEmpty={(isEmpty) => {}}
-  onFreeForm={(isFreeForm) => {}}
+  onDirty={(dirty) => {}}
+  onEmpty={(empty) => {}}
+  onFreeForm={(freeForm) => {}}
+  onState={(state) => {}}
   onGeolocation={(hasGeolocation, position) => {}}
 
   // other HTML input props get forwarded
