@@ -17,7 +17,6 @@
   <a href="#-quick-start">Quick start</a> • 
   <a href="#-component-properties">Component properties</a> • 
   <a href="#-custom-hook">Custom hook</a> • 
-  <a href="#-troubleshoot">Troubleshoot</a> • 
   <a href="#%EF%B8%8F-license">License</a>
 </p>
 
@@ -39,20 +38,25 @@ Then import the package and perform your first address search:
 
 ```jsx
 import { PlaceKit } from '@placekit/autocomplete-react';
+import { useMemo } from 'react';
 
 const MyComponent = (props) => {
+  const options = useMemo(() => ({
+    countries: ['fr']
+  }), []);
+  
   return (
     <PlaceKit
       apiKey="<your-api-key>"
-      options={{
-        countries: ['fr']
-      }}
+      options={options}
     />
   );
 };
 
 export default MyComponent;
 ```
+
+⚠️ Make sure you memoize options and handler functions with `useMemo` and `useCallback` to avoid unnecessary re-renders of the `<PlaceKit>` component, causing the PlaceKit client to remount, and the suggestions lists to flush.
 
 **Important**: the `countries` option is **required** at search time, but we like to keep it optional across all methods so developers remain free on when and how to define it.
 
@@ -65,11 +69,12 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
 
 ```jsx
 <PlaceKit
-  apiKey="<your-api-key>"
+  // component options
   useGeolocation={false} // hide "ask geolocation" button
   className="your-custom-classes" // <div> wrapper custom classes
 
   // PlaceKit Autocomplete JS options
+  apiKey="<your-api-key>"
   options={{
     offset: 4,
     template: (item, index) => {},
@@ -87,7 +92,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
     coordinates: '48.86,2.29',
   }}
 
-  // handlers
+  // event handlers
   onOpen={() => {}}
   onClose={() => {}}
   onResults={(query, results) => {}}
@@ -97,11 +102,13 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onFreeForm={(isFreeForm) => {}}
   onGeolocation={(hasGeolocation, position) => {}}
 
-  // and other native properties will be forwared to the <input> element
+  // native HTML input props
   id="my-input"
   name="address"
   placeholder="Search places..."
   disabled={true}
+  required={true}
+  autoFocus={true}
 />
 ```
 
@@ -112,6 +119,7 @@ A few additional notes:
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.
+- Again, make sure you memoize options and handler functions with `useMemo` and `useCallback`.
 
 ## 🪝 Custom hook
 
@@ -140,56 +148,6 @@ A few additional notes:
 - `state` exposes stateless client properties (`isEmpty`, `isFreeForm` and `hasGeolocation`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
-
-## 🚒 Troubleshoot
-
-When `<PlaceKit>` is used within a component using states, re-renders propagate, causing the PlaceKit client to reset and flush the suggestions list.
-
-In this example, when the user picks an address from the suggestions, `address` is being set and causes `MyComponent` to rerender in full.
-
-```jsx
-const MyComponent = () => {
-  const [address, setAddress] = useState();
-  return (
-    <div>
-      <PlaceKit
-        apiKey="<your-api-key>"
-        options={{
-          countries: ['fr'],
-        }}
-        onPick={(value) => setAddress(value)}
-      />
-      <pre>
-        {address}
-      </pre>
-    </div>
-  );
-};
-```
-
-To avoid this, wrap the `<PlaceKit>` with `useMemo`:
-
-```jsx
-const MyComponent = () => {
-  const [address, setAddress] = useState();
-  return (
-    <div>
-      {useMemo(() => (
-        <PlaceKit
-          apiKey="<your-api-key>"
-          options={{
-            countries: ['fr'],
-          }}
-          onPick={(value) => setAddress(value)}
-        />
-      ), [])}
-      <pre>
-        {address}
-      </pre>
-    </div>
-  );
-};
-```
 
 ## ⚖️ License
 

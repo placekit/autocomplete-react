@@ -17,7 +17,7 @@ export const usePlaceKit = (apiKey, options) => {
     isFreeForm: true,
     hasGeolocation: false,
   });
-
+  
   useEffect(
     () => {
       if (!target.current) {
