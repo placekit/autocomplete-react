@@ -102,18 +102,20 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   name="address"
   placeholder="Search places..."
   disabled={true}
+  defaultValue="France"
   // ...
 />
 ```
 
 Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js) documentation for more details about the options.
 
-A few additional notes:
+Some additional notes:
 - The `<input>` is using React `ref` attribute. It is therefore an [uncontrolled component](https://reactjs.org/docs/uncontrolled-components.html) and should be treated as such.
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.
 - ⚠️ Make sure you memoize handler functions with `useCallback`, otherwise the `<PlaceKit>` component will re-render each time the wrapping component re-renders, causing the PlaceKit client to remount, and the suggestions lists to flush.
+- ⚠️ Passing a non-empty value to `defaultValue` will automatically trigger a first search request when the user focuses the input.
 
 ## 🪝 Custom hook
 
