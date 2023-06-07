@@ -17,6 +17,18 @@ const AddressForm = () => {
     []
   );
 
+  const handlePick = useCallback(
+    (_,  item) => {
+      methods.setValue('address', item.name);
+      methods.setValue('city', item.city);
+      if (item.zipcode[0]) {
+        methods.setValue('zipcode', item.zipcode[0]);
+      }
+      methods.setValue('country', item.country);
+    },
+    [methods]
+  );
+
   return (
     <form
       onSubmit={methods.handleSubmit(onSubmit)}
@@ -38,14 +50,7 @@ const AddressForm = () => {
           options={{
             countries: ['fr'],
           }}
-          onPick={(_,  item) => {
-            methods.setValue('address', item.name);
-            methods.setValue('city', item.city);
-            if (item.zipcode[0]) {
-              methods.setValue('zipcode', item.zipcode[0]);
-            }
-            methods.setValue('country', item.country);
-          }}
+          onPick={handlePick}
           {...methods.register('address')}
         />
       </div>

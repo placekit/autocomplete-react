@@ -1,5 +1,5 @@
 import { MapContainer, Marker, TileLayer, ZoomControl } from 'react-leaflet';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { PlaceKit } from '@placekit/autocomplete-react';
 
@@ -16,6 +16,22 @@ const App = () => {
     [coords, map]
   );
 
+  const handlePick = useCallback(
+    (_, item) => setCoords({
+      lat: item.lat,
+      lng: item.lng,
+    }),
+    []
+  );
+
+  const handleGeolocation = useCallback(
+    (_, pos) => setCoords({
+      lat: pos.coords.latitude,
+      lng: pos.coords.longitude,
+    }),
+    []
+  );
+
   return (
     <div className="relative w-[600px]">
       <div className="absolute top-2 left-2 w-96 z-[500]">
@@ -24,14 +40,8 @@ const App = () => {
           options={{
             countries: ['fr'],
           }}
-          onPick={(_, item) => setCoords({
-            lat: item.lat,
-            lng: item.lng,
-          })}
-          onGeolocation={(_, pos) => setCoords({
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude,
-          })}
+          onPick={handlePick}
+          onGeolocation={handleGeolocation}
         />
       </div>
       <MapContainer

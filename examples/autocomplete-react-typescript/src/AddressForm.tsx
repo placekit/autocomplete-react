@@ -1,4 +1,5 @@
 import { PlaceKit } from '@placekit/autocomplete-react';
+import type { PlaceKitProps } from '@placekit/autocomplete-react';
 import { useCallback, useState } from 'react';
 
 import FormField from './FormField';
@@ -36,6 +37,18 @@ const AddressForm = () => {
     [values]
   );
 
+  const handlePick: Exclude<PlaceKitProps['onPick'], undefined> = useCallback(
+    (value, item) => {
+      setValues({
+        address: value,
+        city: item.city,
+        zipcode: item.zipcode[0],
+        country: item.country,
+      });
+    },
+    []
+  );
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -57,14 +70,7 @@ const AddressForm = () => {
           options={{
             countries: ['fr'],
           }}
-          onPick={(value, item) => {
-            setValues({
-              address: value,
-              city: item.city,
-              zipcode: item.zipcode[0],
-              country: item.country,
-            });
-          }}
+          onPick={handlePick}
         />
       </div>
       <FormField
