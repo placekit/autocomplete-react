@@ -17,7 +17,7 @@ export const usePlaceKit = (apiKey, options = {}) => {
   const target = useRef(null);
   const [client, setClient] = useState();
   const [state, setState] = useState({
-    dirty: true,
+    dirty: false,
     empty: true,
     freeForm: true,
     hasGeolocation: false,
@@ -75,6 +75,18 @@ export const usePlaceKit = (apiKey, options = {}) => {
       }
     },
     [state, onState]
+  );
+
+  useEffect(
+    () => {
+      if (target.current) {
+        setState((prev) => ({
+          ...prev,
+          empty: !target.current.value,
+        }));
+      }
+    },
+    [target.current]
   );
 
   return {
