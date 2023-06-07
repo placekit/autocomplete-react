@@ -110,6 +110,7 @@ PlaceKit.propTypes = {
     formatValue: PropTypes.func,
     strategy: PropTypes.oneOf(['absolute', 'fixed']),
     flip: PropTypes.bool,
+    countryAutoFill: PropTypes.bool,
     className: PropTypes.string,
     timeout: PropTypes.number,
     maxResults: PropTypes.number,

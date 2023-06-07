@@ -78,6 +78,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
     noResults: '',
     strategy: 'absolute',
     flip: false,
+    countryAutoFill: false,
     className: 'panel-custom-class',
     timeout: 5000,
     maxResults: 5,
