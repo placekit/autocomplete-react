@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { forwardRef, memo, useEffect } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 
 import { usePlaceKit } from './usePlaceKit';
 
-const PlaceKit = memo(forwardRef(({
+const PlaceKit = forwardRef(({
   apiKey,
   className,
   useGeolocation,
@@ -76,7 +76,7 @@ const PlaceKit = memo(forwardRef(({
         type="button"
         className="pka-input-clear"
         title="Clear value"
-        aria-hidden={state.isEmpty}
+        aria-hidden={state.empty}
         onClick={client?.clear}
         disabled={inputProps.disabled}
       >
@@ -89,7 +89,7 @@ const PlaceKit = memo(forwardRef(({
       />
     </div>
   );
-}));
+});
 
 PlaceKit.defaultProps = {
   useGeolocation: true,

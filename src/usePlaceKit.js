@@ -17,7 +17,7 @@ export const usePlaceKit = (apiKey, options = {}) => {
   const target = useRef(null);
   const [client, setClient] = useState();
   const [state, setState] = useState({
-    dirty: true,
+    dirty: false,
     empty: true,
     freeForm: true,
     hasGeolocation: false,
@@ -39,6 +39,9 @@ export const usePlaceKit = (apiKey, options = {}) => {
         .on('results', handlers?.onResults)
         .on('pick', handlers?.onPick)
         .on('error', handlers?.onError)
+        .on('dirty', handlers?.onDirty)
+        .on('empty', handlers?.onEmpty)
+        .on('freeForm', handlers?.freeForm)
         .on('state', (newState) => {
           setState((prev) => ({
             ...prev,
@@ -55,6 +58,12 @@ export const usePlaceKit = (apiKey, options = {}) => {
           }
         });
       setClient(pka);
+
+      // init state
+      setState({
+        ...pka.state,
+        hasGeolocation: pka.hasGeolocation,
+      });
 
       return () => {
         pka.destroy();
