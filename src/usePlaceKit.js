@@ -59,6 +59,12 @@ export const usePlaceKit = (apiKey, options = {}) => {
         });
       setClient(pka);
 
+      // init state
+      setState({
+        ...pka.state,
+        hasGeolocation: pka.hasGeolocation,
+      });
+
       return () => {
         pka.destroy();
         setClient();
@@ -75,18 +81,6 @@ export const usePlaceKit = (apiKey, options = {}) => {
       }
     },
     [state, onState]
-  );
-
-  useEffect(
-    () => {
-      if (target.current) {
-        setState((prev) => ({
-          ...prev,
-          empty: !target.current.value,
-        }));
-      }
-    },
-    [target.current]
   );
 
   return {
