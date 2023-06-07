@@ -39,6 +39,9 @@ export const usePlaceKit = (apiKey, options = {}) => {
         .on('results', handlers?.onResults)
         .on('pick', handlers?.onPick)
         .on('error', handlers?.onError)
+        .on('dirty', handlers?.onDirty)
+        .on('empty', handlers?.onEmpty)
+        .on('freeForm', handlers?.freeForm)
         .on('state', (newState) => {
           setState((prev) => ({
             ...prev,
