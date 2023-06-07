@@ -17,6 +17,7 @@
   <a href="#-quick-start">Quick start</a> • 
   <a href="#-component-properties">Component properties</a> • 
   <a href="#-custom-hook">Custom hook</a> • 
+  <a href="#-avoid-re-renders">Avoid re-renders</a> • 
   <a href="#%EF%B8%8F-license">License</a>
 </p>
 
@@ -139,13 +140,50 @@ const MyComponent = (props) => {
 
 Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js) documentation for more details about the options.
 
-A few additional notes:
+Some additional notes:
 - `target` is a React `ref` object.
 - The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case).
-- Don't pass a destructured object into `usePlaceKit` second argument (options), this will cause an infinite update loop as a destructured object will constantly be a fresh new value by nature.
 - `state` exposes stateless client properties (`dirty`, `empty`, `freeForm`, `hasGeolocation`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
+
+## 🔁 Avoid re-renders
+
+`<PlaceKit>` is mostly just a wrapper around [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js): it uses `useEffect` to mount it and any change made in the options will cause it to reset and flush the suggestions list.
+
+Because of the way React works, object/array/function literals are always considered fresh values and may cause an unwanted reset of autocomplete JS. Since 1.1.5, `options` object can be passed as literal thanks to [useStableValue](./src/useStableValue.js), but functions and event handlers will still cause re-renders if not memoized.
+
+To avoid re-renders, memoize or hoist those literals:
+
+```jsx
+import { PlaceKit } from '@placekit/autocomplete-react';
+import { useCallback } from 'react';
+
+// hoisting option functions (declaring outside of the component)
+const formatValue = (item) => item.name;
+
+const MyComponent = (props) => {
+
+  // memoizing event handlers with useCallback
+  const handlePick = useCallback(
+    (value, item) => {
+      console.log(item);
+    },
+    []
+  );
+
+  return (
+    <PlaceKit
+      apiKey="<your-api-key>"
+      options={{
+        countries: ['fr'],
+        formatValue,
+      }}
+      onPick={handlePick}
+    />
+  );
+};
+```
 
 ## ⚖️ License
 
