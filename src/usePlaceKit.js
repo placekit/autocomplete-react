@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useStableValue } from './useStableValue';
 
 export const usePlaceKit = (apiKey, options = {}) => {
+  // throw error if invalid options
   if (
-    !['object', 'undefined'].includes(typeof options) ||
+    typeof options !== 'object' ||
     Array.isArray(options) ||
     options === null
   ) {
