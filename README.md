@@ -95,11 +95,11 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onResults={(query, results) => {}}
   onPick={(value, item, index) => {}}
   onError={(error) => {}}
-  onDirty={(dirty) => {}}
-  onEmpty={(empty) => {}}
-  onFreeForm={(freeForm) => {}}
+  onDirty={(bool) => {}}
+  onEmpty={(bool) => {}}
+  onFreeForm={(bool) => {}}
+  onGeolocation={(bool, position) => {}}
   onState={(state) => {}}
-  onGeolocation={(hasGeolocation, position) => {}}
 
   // other HTML input props get forwarded
   id="my-input"
@@ -118,7 +118,7 @@ Some additional notes:
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.
-- ⚠️ Make sure you memoize handler functions with `useCallback`, see [Avoid re-renders](#-avoid-re-renders).
+- It's recommended to memoize handler functions with `useCallback`, see [Avoid re-renders](#-avoid-re-renders).
 - ⚠️ Passing a non-empty value to `defaultValue` will automatically trigger a first search request when the user focuses the input.
 
 ## 🪝 Custom hook
@@ -144,17 +144,17 @@ Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocompl
 Some additional notes:
 - `target` is a React `ref` object.
 - The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case).
-- `state` exposes stateless client properties (`dirty`, `empty`, `freeForm`, `hasGeolocation`) as stateful ones.
+- `state` exposes stateless client properties (`dirty`, `empty`, `freeForm`, `geolocation`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
 
 ## 🔁 Avoid re-renders
 
-`<PlaceKit>` is mostly just a wrapper around [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js): it uses `useEffect` to mount it and any change made in the options will cause it to reset and flush the suggestions list.
+Because of the way React works, object/array/function literals are always considered fresh values and may cause unnecessary re-renders.
 
-Because of the way React works, object/array/function literals are always considered fresh values and may cause an unwanted reset of autocomplete JS. Since 1.1.5, `options` object can be passed as literal thanks to [useStableValue](./src/useStableValue.js), but functions and event handlers will still cause re-renders if not memoized.
+`<PlaceKit>` is mostly just a wrapper around [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js): it uses `useEffect` to mount it and update options. We've made it quite resilient to updates, but each time `options` updates, `pka.configure()` is called and makes some computations.
 
-To avoid re-renders, memoize or hoist those literals:
+To avoid unnecessary re-renders, memoize or hoist those literals:
 
 ```jsx
 import { PlaceKit } from '@placekit/autocomplete-react';
@@ -185,6 +185,8 @@ const MyComponent = (props) => {
   );
 };
 ```
+
+⚠️ If you need `apiKey` to be set dynamically, use `useMemo` to memoize it, otherwise the whole autocomplete will reset at each component update, flushing the suggestions list.
 
 ## ⚖️ License
 
