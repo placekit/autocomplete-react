@@ -4,36 +4,54 @@ import { useEffect, useRef, useState } from 'react';
 import { useStableValue } from './useStableValue';
 
 export const usePlaceKit = (apiKey, options = {}) => {
-  const stableOptions = useStableValue(options);
-
   if (
-    !['object', 'undefined'].includes(typeof stableOptions) ||
-    Array.isArray(stableOptions) ||
-    stableOptions === null
+    !['object', 'undefined'].includes(typeof options) ||
+    Array.isArray(options) ||
+    options === null
   ) {
     throw Error('PlaceKit: `options` parameter is invalid, expected an object.');
   }
 
+  // init states
+  const stableOptions = useStableValue(options);
   const target = useRef(null);
   const [client, setClient] = useState();
   const [state, setState] = useState({
     dirty: false,
     empty: true,
     freeForm: true,
-    hasGeolocation: false,
+    geolocation: false,
   });
 
+  // mount PlaceKit Autocomplete JS
   useEffect(
     () => {
       if (!target.current) {
         return;
       }
 
-      const { handlers, ...opts } = stableOptions || {};
       const pka = placekitAutocomplete(apiKey, {
         target: target.current,
-        ...opts,
-      })
+      });
+      setClient(pka);
+
+      return () => {
+        pka.destroy();
+        setClient();
+      };
+    },
+    [apiKey, target.current]
+  );
+
+  // run `pka.configure()` when options update
+  useEffect(
+    () => {
+      if (!client) {
+        return;
+      }
+
+      const { handlers, ...opts } = stableOptions || {};
+      client
         .on('open', handlers?.onOpen)
         .on('close', handlers?.onClose)
         .on('results', handlers?.onResults)
@@ -42,45 +60,19 @@ export const usePlaceKit = (apiKey, options = {}) => {
         .on('dirty', handlers?.onDirty)
         .on('empty', handlers?.onEmpty)
         .on('freeForm', handlers?.freeForm)
+        .on('geolocation', handlers?.onGeolocation)
         .on('state', (newState) => {
-          setState((prev) => ({
-            ...prev,
-            ...newState,
-          }));
-        })
-        .on('geolocation', (bool, pos) => {
-          setState((prev) => ({
-            ...prev,
-            hasGeolocation: bool,
-          }));
-          if (handlers?.onGeolocation) {
-            handlers.onGeolocation(bool, pos);
+          setState(newState);
+          if (handlers?.onState) {
+            handlers.onState(newState);
           }
-        });
-      setClient(pka);
+        })
+        .configure(opts);
 
-      // init state
-      setState({
-        ...pka.state,
-        hasGeolocation: pka.hasGeolocation,
-      });
-
-      return () => {
-        pka.destroy();
-        setClient();
-      };
+      // inject initial state from client
+      setState(client.state);
     },
-    [apiKey, stableOptions, target.current]
-  );
-
-  const onState = stableOptions.handlers?.onState;
-  useEffect(
-    () => {
-      if (onState) {
-        onState(state);
-      }
-    },
-    [state, onState]
+    [client, stableOptions]
   );
 
   return {

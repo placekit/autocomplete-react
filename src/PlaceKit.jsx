@@ -61,11 +61,11 @@ const PlaceKit = forwardRef(({
           type="button"
           className={[
             'pka-input-geolocation',
-            state.hasGeolocation ? 'pka-enabled' : '',
+            state.geolocation ? 'pka-enabled' : '',
           ].filter((c) => c).join(' ')}
           title="Activate geolocation"
           role="switch"
-          aria-checked={state.hasGeolocation}
+          aria-checked={state.geolocation}
           onClick={client?.requestGeolocation}
           disabled={inputProps.disabled}
         >
@@ -130,8 +130,8 @@ PlaceKit.propTypes = {
   onDirty: PropTypes.func,
   onEmpty: PropTypes.func,
   onFreeForm: PropTypes.func,
-  onState: PropTypes.func,
   onGeolocation: PropTypes.func,
+  onState: PropTypes.func,
 
   // other HTML input props get forwarded
 };
