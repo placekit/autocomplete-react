@@ -36,6 +36,7 @@ const PlaceKit = forwardRef(({
     },
   });
 
+  // forward ref from `target`
   useEffect(
     () => {
       if (target.current && ref) {
