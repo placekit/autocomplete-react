@@ -118,7 +118,7 @@ Some additional notes:
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.
-- ⚠️ Make sure you memoize handler functions with `useCallback`, see [Avoid re-renders](#-avoid-re-renders).
+- It's recommended to memoize handler functions with `useCallback`, see [Avoid re-renders](#-avoid-re-renders).
 - ⚠️ Passing a non-empty value to `defaultValue` will automatically trigger a first search request when the user focuses the input.
 
 ## 🪝 Custom hook
@@ -186,7 +186,7 @@ const MyComponent = (props) => {
 };
 ```
 
-If you need `apiKey` to be set dynamically, use `useMemo` to memoize it, otherwise the whole autocomplete will reset at each component update, flushing the suggestions list.
+⚠️ If you need `apiKey` to be set dynamically, use `useMemo` to memoize it, otherwise the whole autocomplete will reset at each component update, flushing the suggestions list.
 
 ## ⚖️ License
 
