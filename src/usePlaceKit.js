@@ -62,7 +62,7 @@ export const usePlaceKit = (apiKey, options = {}) => {
         .on('empty', handlers?.onEmpty)
         .on('freeForm', handlers?.freeForm)
         .on('geolocation', handlers?.onGeolocation)
-        .on('state', (newState) => {
+        .on('state', ({ ...newState }) => { // spread to remove `client.state` reference
           setState(newState);
           if (handlers?.onState) {
             handlers.onState(newState);
@@ -70,8 +70,8 @@ export const usePlaceKit = (apiKey, options = {}) => {
         })
         .configure(opts);
 
-      // inject initial state from client
-      setState(client.state);
+      // inject initial state from client (spread to remove `client.state` reference)
+      setState({ ...client.state });
     },
     [client, stableOptions]
   );
