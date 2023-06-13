@@ -144,7 +144,7 @@ Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocompl
 
 Some additional notes:
 - `target` is a React `ref` object.
-- The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case).
+- The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case) except for `onClient` which is specific to Autocomplete React.
 - `state` exposes stateless client properties (`dirty`, `empty`, `freeForm`, `geolocation`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
@@ -182,6 +182,8 @@ const MyComponent = (props) => {
   );
 };
 ```
+
+`onClient` is an exception for handlers: it's **specific to Autocomplete React** and isn't passed in `options.handlers` to Autocomplete JS, so updating it doesn't trigger `pka.configure()`.
 
 Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-reference) documentation for more details about the client methods.
 
