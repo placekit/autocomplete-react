@@ -7,13 +7,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@placekit/autocomplete-react": "^1.4.1",
+    "@placekit/autocomplete-react": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.9",
-    "@types/react-dom": "^18.2.4",
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
