@@ -1,6 +1,7 @@
 import type { PKAClient, PKAHandlers, PKAOptions, PKAState } from '@placekit/autocomplete-js';
 
 type Handlers = {
+  onClient: (client?: PKAClient) => void;
   onOpen: PKAHandlers['open'];
   onClose: PKAHandlers['close'];
   onResults: PKAHandlers['results'];
@@ -18,7 +19,6 @@ export type PlaceKitProps = {
   useGeolocation?: boolean;
   className?: string;
   options?: Omit<PKAOptions, 'target'>;
-  onClient?: (client?: PKAClient) => void;
 } & Partial<Handlers> & React.HTMLProps<HTMLInputElement>;
 
 export type PlaceKitOptions = Omit<PKAOptions, 'target'> & {
