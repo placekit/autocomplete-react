@@ -8,6 +8,7 @@ const PlaceKit = forwardRef(({
   className,
   useGeolocation,
   options,
+  onClient,
   onOpen,
   onClose,
   onResults,
@@ -36,6 +37,16 @@ const PlaceKit = forwardRef(({
     },
   });
 
+  // update default value (only if untouched)
+  useEffect(
+    () => {
+      if (client && !client.state.dirty) {
+        client.setValue(inputProps.defaultValue);
+      }
+    },
+    [inputProps.defaultValue, client]
+  );
+
   // forward ref from `target`
   useEffect(
     () => {
@@ -49,6 +60,17 @@ const PlaceKit = forwardRef(({
     },
     [target.current]
   );
+
+  // pass client to `onClient` when it updates
+  useEffect(
+    () => {
+      if (onClient?.call) {
+        onClient(client);
+      }
+    },
+    [client, onClient]
+  );
+
 
   return (
     <div
@@ -123,6 +145,7 @@ PlaceKit.propTypes = {
   }),
 
   // event handlers
+  onClient: PropTypes.func,
   onOpen: PropTypes.func,
   onClose: PropTypes.func,
   onResults: PropTypes.func,

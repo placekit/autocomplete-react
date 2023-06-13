@@ -17,7 +17,7 @@
   <a href="#-quick-start">Quick start</a> • 
   <a href="#-component-properties">Component properties</a> • 
   <a href="#-custom-hook">Custom hook</a> • 
-  <a href="#-avoid-re-renders">Avoid re-renders</a> • 
+  <a href="#-Troubleshoot">Troubleshoot</a> • 
   <a href="#%EF%B8%8F-license">License</a>
 </p>
 
@@ -90,6 +90,7 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   }}
 
   // event handlers (⚠️ use useCallback, see notes)
+  onClient={(client) => {}}
   onOpen={() => {}}
   onClose={() => {}}
   onResults={(query, results) => {}}
@@ -111,15 +112,14 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
 />
 ```
 
-Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js) documentation for more details about the options.
+Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#pkaoptions) documentation for more details about the options.
 
 Some additional notes:
-- The `<input>` is using React `ref` attribute. It is therefore an [uncontrolled component](https://reactjs.org/docs/uncontrolled-components.html) and should be treated as such.
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
 - If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.
-- It's recommended to memoize handler functions with `useCallback`, see [Avoid re-renders](#-avoid-re-renders).
-- ⚠️ Passing a non-empty value to `defaultValue` will automatically trigger a first search request when the user focuses the input.
+- It's recommended to memoize handler functions with `useCallback`, see [Avoid re-renders](#avoid-re-renders).
+- ⚠️ The `<input>` it is an **uncontrolled component**. See [dynamic default value](#dynamic-default-value).
 
 ## 🪝 Custom hook
 
@@ -131,6 +131,7 @@ import { usePlaceKit } from '@placekit/autocomplete-react';
 const MyComponent = (props) => {
   const { target, client, state } = usePlaceKit('<your-api-key>', {
     countries: ['fr'],
+    // other options
   });
 
   return (
@@ -139,7 +140,7 @@ const MyComponent = (props) => {
 };
 ```
 
-Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js) documentation for more details about the options.
+Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#pkaoptions) documentation for more details about the options.
 
 Some additional notes:
 - `target` is a React `ref` object.
@@ -148,7 +149,43 @@ Some additional notes:
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
 
-## 🔁 Avoid re-renders
+## 🚒 Troubleshoot
+
+### Access Autocomplete JS client from parent component
+
+Use the extra `onClient` handler to access the client from the parent component:
+
+```jsx
+import { PlaceKit } from '@placekit/autocomplete-react';
+import { useEffect, useState } from 'react';
+
+const MyComponent = (props) => {
+  const [client, setClient] = useState();
+
+  useEffect(
+    () => {
+      if (client) {
+        // do something
+      }
+    },
+    [client]
+  );
+
+  return (
+    <PlaceKit
+      apiKey="<your-api-key>"
+      onClient={setClient}
+      options={{
+        countries: ['fr']
+      }}
+    />
+  );
+};
+```
+
+Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-reference) documentation for more details about the client methods.
+
+### Avoid re-renders
 
 Because of the way React works, object/array/function literals are always considered fresh values and may cause unnecessary re-renders.
 
@@ -187,6 +224,14 @@ const MyComponent = (props) => {
 ```
 
 ⚠️ If you need `apiKey` to be set dynamically, use `useMemo` to memoize it, otherwise the whole autocomplete will reset at each component update, flushing the suggestions list.
+
+### Dynamic default value
+
+The `<input>` is an [**uncontrolled component**](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components) and should be treated as such. Making it controlled may cause typing glitches because React state in controlled components can conflict with Autocomplete JS internal state management.
+
+You can dyamically set a `defaultValue` and it'll update the input value as long as it has not been touched by the user (`state.dirty === false`).
+
+⚠️ Passing a non-empty value to `defaultValue` will automatically trigger a first search request when the user focuses the input.
 
 ## ⚖️ License
 

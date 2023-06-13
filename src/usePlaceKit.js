@@ -1,7 +1,7 @@
 import placekitAutocomplete from '@placekit/autocomplete-js';
 import { useEffect, useRef, useState } from 'react';
 
-import { useStableValue } from './helpers';
+import { useStableValue } from './useStableValue';
 
 export const usePlaceKit = (apiKey, options = {}) => {
   // throw error if invalid options
@@ -62,15 +62,15 @@ export const usePlaceKit = (apiKey, options = {}) => {
         .on('empty', handlers?.onEmpty)
         .on('freeForm', handlers?.freeForm)
         .on('geolocation', handlers?.onGeolocation)
-        .on('state', (newState) => {
-          setState({ ...newState });
+        .on('state', ({ ...newState }) => { // spread to remove `client.state` reference
+          setState(newState);
           if (handlers?.onState) {
-            handlers.onState({ ...newState });
+            handlers.onState(newState);
           }
         })
         .configure(opts);
 
-      // inject initial state from client
+      // inject initial state from client (spread to remove `client.state` reference)
       setState({ ...client.state });
     },
     [client, stableOptions]
