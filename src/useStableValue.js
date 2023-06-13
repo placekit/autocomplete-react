@@ -3,7 +3,7 @@ import { useState } from 'react';
 // dequal borrowed from https://github.com/lukeed/dequal/blob/master/src/lite.js
 const has = Object.prototype.hasOwnProperty;
 
-const dequal = (foo, bar) => {
+function dequal(foo, bar) {
   let ctor; let len;
   if (foo === bar) return true;
 
@@ -30,13 +30,13 @@ const dequal = (foo, bar) => {
   }
 
   return foo !== foo && bar !== bar;
-};
+}
 
 // prevent re-renders when options prop is an object literal
-export const useStableValue = (value) => {
+export function useStableValue(value) {
   const [stableValue, setStableValue] = useState(() => value);
   if (!dequal(stableValue, value)) {
     setStableValue(value);
   }
   return stableValue;
-};
+}
