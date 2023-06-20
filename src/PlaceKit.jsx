@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useCallback, useEffect } from 'react';
 
 import { usePlaceKit } from './usePlaceKit';
 
@@ -71,6 +71,19 @@ const PlaceKit = forwardRef(({
     [client, onClient]
   );
 
+  // toggle geolocation
+  const toggleGeolocation = useCallback(
+    () => {
+      if (client) {
+        if (client.state.geolocation) {
+          client.clearGeolocation();
+        } else {
+          client.requestGeolocation();
+        }
+      }
+    },
+    [client]
+  );
 
   return (
     <div
@@ -89,7 +102,7 @@ const PlaceKit = forwardRef(({
           title="Activate geolocation"
           role="switch"
           aria-checked={state.geolocation}
-          onClick={client?.requestGeolocation}
+          onClick={toggleGeolocation}
           disabled={inputProps.disabled}
         >
           <span className="pka-sr-only">Activate geolocation</span>
