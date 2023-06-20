@@ -98,7 +98,7 @@ const PlaceKit = forwardRef(({
           className={[
             'pka-input-geolocation',
             state.geolocation ? 'pka-enabled' : '',
-          ].filter((c) => c).join(' ')}
+          ].join(' ').trim()}
           title="Activate geolocation"
           role="switch"
           aria-checked={state.geolocation}
