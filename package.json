@@ -40,9 +40,9 @@
     "@babel/core": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-commonjs": "^25.0.1",
+    "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
-    "eslint": "^8.42.0",
+    "eslint": "^8.43.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.32.2",
     "npm-watch": "^0.11.0",
@@ -51,8 +51,8 @@
     "rollup-plugin-copy": "^3.4.0"
   },
   "dependencies": {
-    "@placekit/autocomplete-js": "^1.5.0",
-    "@types/react": "^18.2.12",
+    "@placekit/autocomplete-js": "^1.6.0",
+    "@types/react": "^18.2.13",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
