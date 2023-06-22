@@ -51,7 +51,7 @@
     "rollup-plugin-copy": "^3.4.0"
   },
   "dependencies": {
-    "@placekit/autocomplete-js": "^1.6.0",
+    "@placekit/autocomplete-js": "^1.6.1",
     "@types/react": "^18.2.13",
     "prop-types": "^15.8.1"
   },
