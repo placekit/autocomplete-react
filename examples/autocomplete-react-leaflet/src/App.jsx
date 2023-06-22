@@ -10,25 +10,24 @@ const App = () => {
   useEffect(
     () => {
       if (coords && map.current) {
-        map.current.setView(coords, 17);
+        map.current.setView(coords, 16);
       }
     },
     [coords, map]
   );
 
   const handlePick = useCallback(
-    (_, item) => setCoords({
-      lat: item.lat,
-      lng: item.lng,
-    }),
+    (_, item) => {
+      const [lat, lng] = item.coordinates.split(',');
+      setCoords([lat, lng]);
+    },
     []
   );
 
   const handleGeolocation = useCallback(
-    (_, pos) => setCoords({
-      lat: pos.coords.latitude,
-      lng: pos.coords.longitude,
-    }),
+    (_, pos) => {
+      setCoords([pos.coords.latitude, pos.coords.longitude]);
+    },
     []
   );
 
@@ -60,7 +59,7 @@ const App = () => {
           position="topright"
         />
         {!!coords && (
-          <Marker position={[coords.lat, coords.lng]} />
+          <Marker position={coords} />
         )}
       </MapContainer>
     </div>
