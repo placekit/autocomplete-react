@@ -36,9 +36,6 @@ const App = () => {
       <div className="absolute top-2 left-2 w-96 z-[500]">
         <PlaceKit
           apiKey={import.meta.env.VITE_PLACEKIT_API_KEY}
-          options={{
-            countries: ['fr'],
-          }}
           onPick={handlePick}
           onGeolocation={handleGeolocation}
         />

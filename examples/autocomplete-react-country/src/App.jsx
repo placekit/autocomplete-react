@@ -30,7 +30,7 @@ const App = () => {
         useGeolocation={false}
         options={{
           types: ['country'],
-          countryAutoFill: true,
+          // countryAutoFill: false, // uncomment to prevent automatic country detection
         }}
         onPick={handlePick}
         onEmpty={handleEmpty}

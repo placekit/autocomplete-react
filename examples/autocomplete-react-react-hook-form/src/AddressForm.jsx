@@ -47,9 +47,6 @@ const AddressForm = () => {
         <PlaceKit
           name="address"
           apiKey={import.meta.env.VITE_PLACEKIT_API_KEY}
-          options={{
-            countries: ['fr'],
-          }}
           onPick={handlePick}
           {...methods.register('address')}
         />

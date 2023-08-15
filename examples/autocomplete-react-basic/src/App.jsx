@@ -4,9 +4,6 @@ const App = () => (
   <div className="flex justify-center">
     <PlaceKit
       apiKey={import.meta.env.VITE_PLACEKIT_API_KEY}
-      options={{
-        countries: ['fr'],
-      }}
       className="w-96"
     />
   </div>
