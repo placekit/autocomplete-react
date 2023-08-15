@@ -6,7 +6,7 @@ import { usePlaceKit } from './usePlaceKit';
 const PlaceKit = forwardRef(({
   apiKey,
   className,
-  useGeolocation,
+  geolocation,
   options,
   onClient,
   onOpen,
@@ -14,11 +14,13 @@ const PlaceKit = forwardRef(({
   onResults,
   onPick,
   onError,
+  onCountryChange,
   onDirty,
   onEmpty,
   onFreeForm,
-  onState,
   onGeolocation,
+  onCountryMode,
+  onState,
   ...inputProps
 }, ref) => {
   const { target, client, state } = usePlaceKit(apiKey, {
@@ -29,11 +31,13 @@ const PlaceKit = forwardRef(({
       onResults,
       onPick,
       onError,
+      onCountryChange,
       onDirty,
       onEmpty,
       onFreeForm,
-      onState,
       onGeolocation,
+      onCountryMode,
+      onState,
     },
   });
 
@@ -92,7 +96,7 @@ const PlaceKit = forwardRef(({
         className
       ].filter((c) => c).join(' ')}
     >
-      {!!useGeolocation && (
+      {!!geolocation && (
         <button
           type="button"
           className={[
@@ -128,31 +132,39 @@ const PlaceKit = forwardRef(({
 });
 
 PlaceKit.defaultProps = {
-  useGeolocation: true,
+  geolocation: true,
   options: {},
   placeholder: "Search places...",
 };
 
 PlaceKit.propTypes = {
   // component options
-  useGeolocation: PropTypes.bool,
+  geolocation: PropTypes.bool,
   className: PropTypes.string,
 
   // PlaceKit Autocomplete JS options
   apiKey: PropTypes.string.isRequired,
   options: PropTypes.shape({
-    offset: PropTypes.number,
-    template: PropTypes.func,
-    formatValue: PropTypes.func,
-    strategy: PropTypes.oneOf(['absolute', 'fixed']),
-    flip: PropTypes.bool,
+    panel: PropTypes.shape({
+      className: PropTypes.string,
+      offset: PropTypes.number,
+      strategy: PropTypes.oneOf(['absolute', 'fixed']),
+      flip: PropTypes.bool,
+    }),
+    format: PropTypes.shape({
+      flag: PropTypes.func,
+      icon: PropTypes.func,
+      sub: PropTypes.func,
+      noResults: PropTypes.func,
+      applySuggestion: PropTypes.string,
+      cancel: PropTypes.string,
+    }),
     countryAutoFill: PropTypes.bool,
-    className: PropTypes.string,
+    countrySelect: PropTypes.bool,
     timeout: PropTypes.number,
     maxResults: PropTypes.number,
     types: PropTypes.arrayOf(PropTypes.string),
     language: PropTypes.string,
-    countryByIP: PropTypes.bool,
     countries: PropTypes.arrayOf(PropTypes.string),
     coordinates: PropTypes.string,
   }),
@@ -168,7 +180,9 @@ PlaceKit.propTypes = {
   onEmpty: PropTypes.func,
   onFreeForm: PropTypes.func,
   onGeolocation: PropTypes.func,
+  onCountryMode: PropTypes.func,
   onState: PropTypes.func,
+  onCountryChange: PropTypes.func,
 
   // other HTML input props get forwarded
 };

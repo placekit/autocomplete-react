@@ -22,6 +22,7 @@ export const usePlaceKit = (apiKey, options = {}) => {
     empty: true,
     freeForm: true,
     geolocation: false,
+    countryMode: false,
   });
 
   // mount PlaceKit Autocomplete JS
@@ -58,10 +59,12 @@ export const usePlaceKit = (apiKey, options = {}) => {
         .on('results', handlers?.onResults)
         .on('pick', handlers?.onPick)
         .on('error', handlers?.onError)
+        .on('countryChange', handlers?.onCountryChange)
         .on('dirty', handlers?.onDirty)
         .on('empty', handlers?.onEmpty)
         .on('freeForm', handlers?.freeForm)
         .on('geolocation', handlers?.onGeolocation)
+        .on('countryMode', handlers?.onCountryMode)
         .on('state', ({ ...newState }) => { // spread to remove `client.state` reference
           setState(newState);
           if (handlers?.onState) {

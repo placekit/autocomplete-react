@@ -6,16 +6,18 @@ type Handlers = {
   onResults: PKAHandlers['results'];
   onPick: PKAHandlers['pick'];
   onError: PKAHandlers['error'];
+  onCountryChange: PKAHandlers['countryChange'];
   onDirty: PKAHandlers['dirty'];
   onEmpty: PKAHandlers['empty'];
   onFreeForm: PKAHandlers['freeForm'];
   onGeolocation: PKAHandlers['geolocation'];
+  onCountryMode: PKAHandlers['countryMode'];
   onState: PKAHandlers['state'];
 };
 
 export type PlaceKitProps = {
   apiKey: string;
-  useGeolocation?: boolean;
+  geolocation?: boolean;
   className?: string;
   options?: Omit<PKAOptions, 'target'>;
   onClient?: (client?: PKAClient) => void;

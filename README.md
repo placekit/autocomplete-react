@@ -39,25 +39,19 @@ Then import the package and perform your first address search:
 
 ```jsx
 import { PlaceKit } from '@placekit/autocomplete-react';
+import '@placekit/autocomplete-js/dist/placekit-autocomplete.css';
 
 const MyComponent = (props) => {
   return (
-    <PlaceKit
-      apiKey="<your-api-key>"
-      options={{
-        countries: ['fr']
-      }}
-    />
+    <PlaceKit apiKey="<your-api-key>" />
   );
 };
 
 export default MyComponent;
 ```
 
-**Important**: the `countries` option is **required** at search time, but we like to keep it optional across all methods so developers remain free on when and how to define it.
-
-Also, import default style from `@placekit/autocomplete-js/dist/placekit-autocomplete.css` (`@placekit/autocomplete-js` is set as a dependency of this package and will automatically be installed). It will style the suggestions list and the input.
-If you have trouble importing CSS from `node_modules`, copy/paste [its content](https://github.com/placekit/autocomplete-js/blob/main/src/placekit.css) into your own CSS.
+Importing default style from `@placekit/autocomplete-js/dist/placekit-autocomplete.css` (`@placekit/autocomplete-js` is set as a dependency of this package and will automatically be installed) will style the suggestions list and the input.
+If you have trouble importing CSS from `node_modules`, copy/paste [its content](https://github.com/placekit/autocomplete-js/blob/main/src/placekit-autocomplete.css) into your own CSS.
 
 👉 **Check out our [examples](./examples) for different use cases!**
 
@@ -66,25 +60,33 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
 ```jsx
 <PlaceKit
   // component options
-  useGeolocation={false} // hide "ask geolocation" button
+  geolocation={false} // hide "ask geolocation" button
   className="your-custom-classes" // <div> wrapper custom classes
 
   // PlaceKit Autocomplete JS options
   apiKey="<your-api-key>"
   options={{
-    offset: 4,
-    template: (item, index) => {},
-    formatValue: (item) => {},
-    noResults: '',
-    strategy: 'absolute',
-    flip: false,
+    panel: {
+      className: 'panel-custom-class',
+      offset: 4,
+      strategy: 'absolute',
+      flip: false,
+    },
+    format: {
+      flag: (countrycode) => {},
+      icon: (name, label) => {},
+      sub: (item) => {},
+      noResults: (query) => {},
+      value: (item) => {},
+      applySuggestion: 'Apply suggestion',
+      cancel: 'Cancel',
+    },
     countryAutoFill: false,
-    className: 'panel-custom-class',
+    countrySelect: false,
     timeout: 5000,
     maxResults: 5,
     types: ['city'],
     language: 'fr',
-    countryByIP: false,
     countries: ['fr'],
     coordinates: '48.86,2.29',
   }}
@@ -96,10 +98,12 @@ If you have trouble importing CSS from `node_modules`, copy/paste [its content](
   onResults={(query, results) => {}}
   onPick={(value, item, index) => {}}
   onError={(error) => {}}
+  onCountryChange={(item) => {}}
   onDirty={(bool) => {}}
   onEmpty={(bool) => {}}
   onFreeForm={(bool) => {}}
   onGeolocation={(bool, position) => {}}
+  onCountryMode={(bool) => {}}
   onState={(state) => {}}
 
   // other HTML input props get forwarded
@@ -116,7 +120,7 @@ Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocompl
 
 Some additional notes:
 - If you want to customize the input style, create your own component using our [custom hook](#-custom-hook). You can reuse our component as a base.
-- If you want to customize the suggestions list style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
+- If you want to customize the suggestions panel style, don't import our stylesheet and create your own following [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js#-customize) documentation.
 - Handlers are exposed directly as properties for ease of access.
 - It's recommended to memoize handler functions with `useCallback`, see [Avoid re-renders](#avoid-re-renders).
 - ⚠️ The `<input>` it is an **uncontrolled component**. See [dynamic default value](#dynamic-default-value).
@@ -130,8 +134,7 @@ import { usePlaceKit } from '@placekit/autocomplete-react';
 
 const MyComponent = (props) => {
   const { target, client, state } = usePlaceKit('<your-api-key>', {
-    countries: ['fr'],
-    // other options
+    // options
   });
 
   return (
@@ -145,7 +148,7 @@ Please refer to [PlaceKit Autocomplete JS](https://github.com/placekit/autocompl
 Some additional notes:
 - `target` is a React `ref` object.
 - The handlers can be passed through `options.handlers`, but also be set with `client.on()` (better use a `useState()` in that case) except for `onClient` which is specific to Autocomplete React.
-- `state` exposes stateless client properties (`dirty`, `empty`, `freeForm`, `geolocation`) as stateful ones.
+- `state` exposes stateless client properties (`dirty`, `empty`, `freeForm`, `geolocation`, `countryMode`) as stateful ones.
 
 ⚠️ **NOTE:** you are **not** allowed to hide the PlaceKit logo unless we've delivered a special authorization. To request one, please contact us using [our contact form](https://placekit.io/about#contact).
 
@@ -175,9 +178,6 @@ const MyComponent = (props) => {
     <PlaceKit
       apiKey="<your-api-key>"
       onClient={setClient}
-      options={{
-        countries: ['fr']
-      }}
     />
   );
 };
