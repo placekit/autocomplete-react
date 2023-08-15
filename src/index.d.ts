@@ -17,7 +17,7 @@ type Handlers = {
 
 export type PlaceKitProps = {
   apiKey: string;
-  useGeolocation?: boolean;
+  geolocation?: boolean;
   className?: string;
   options?: Omit<PKAOptions, 'target'>;
   onClient?: (client?: PKAClient) => void;
