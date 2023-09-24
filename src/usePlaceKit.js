@@ -62,7 +62,7 @@ export const usePlaceKit = (apiKey, options = {}) => {
         .on('countryChange', handlers?.onCountryChange)
         .on('dirty', handlers?.onDirty)
         .on('empty', handlers?.onEmpty)
-        .on('freeForm', handlers?.freeForm)
+        .on('freeForm', handlers?.onFreeForm)
         .on('geolocation', handlers?.onGeolocation)
         .on('countryMode', handlers?.onCountryMode)
         .on('state', ({ ...newState }) => { // spread to remove `client.state` reference
