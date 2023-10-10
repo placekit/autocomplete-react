@@ -27,7 +27,7 @@ const App = () => {
     <div className="flex flex-col gap-6 items-center justify-center">
       <PlaceKit
         apiKey={import.meta.env.VITE_PLACEKIT_API_KEY}
-        useGeolocation={false}
+        geolocation={false}
         options={{
           types: ['country'],
           // countryAutoFill: false, // uncomment to prevent automatic country detection
