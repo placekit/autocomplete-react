@@ -1,6 +1,6 @@
 {
   "name": "@placekit/autocomplete-react",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "author": "PlaceKit <support@placekit.io>",
   "description": "PlaceKit Autocomplete React library",
   "license": "MIT",
@@ -53,8 +53,8 @@
     "rollup-plugin-copy": "^3.5.0"
   },
   "dependencies": {
-    "@placekit/autocomplete-js": "^2.1.6",
-    "@types/react": "^18.2.42",
+    "@placekit/autocomplete-js": "^2.1.7",
+    "@types/react": "^18.2.43",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
