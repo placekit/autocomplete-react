@@ -21,7 +21,8 @@ export type PlaceKitProps = {
   className?: string;
   options?: Omit<PKAOptions, 'target'>;
   onClient?: (client?: PKAClient) => void;
-} & Partial<Handlers> & React.HTMLProps<HTMLInputElement>;
+} & Partial<Handlers> &
+  React.HTMLProps<HTMLInputElement>;
 
 export type PlaceKitOptions = Omit<PKAOptions, 'target'> & {
   handlers?: Partial<Handlers>;

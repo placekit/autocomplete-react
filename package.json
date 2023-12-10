@@ -35,7 +35,7 @@
     "dev": "npm-watch build",
     "build": "rollup -c",
     "lint": "eslint ./src",
-    "format": "eslint ./src --fix"
+    "format": "prettier --write ./src"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
@@ -43,9 +43,11 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "eslint": "^8.55.0",
-    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "^7.33.2",
     "npm-watch": "^0.11.0",
+    "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
     "rollup": "^4.7.0",
     "rollup-plugin-copy": "^3.5.0"

@@ -1,0 +1,19 @@
+root: true
+env:
+  browser: true,
+  es2022: true
+extends:
+  - prettier
+plugins:
+  - react
+  - prettier
+settings:
+  react:
+    version: detect
+parserOptions:
+  ecmaVersion: latest
+  ecmaFeatures:
+    jsx: true
+  sourceType: module
+rules:
+  prettier/prettier: error

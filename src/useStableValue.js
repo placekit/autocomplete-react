@@ -4,15 +4,16 @@ import { useState } from 'react';
 const has = Object.prototype.hasOwnProperty;
 
 function dequal(foo, bar) {
-  let ctor; let len;
+  let ctor;
+  let len;
   if (foo === bar) return true;
 
-  if (foo && bar && (ctor=foo.constructor) === bar.constructor) {
+  if (foo && bar && (ctor = foo.constructor) === bar.constructor) {
     if (ctor === Date) return foo.getTime() === bar.getTime();
     if (ctor === RegExp) return foo.toString() === bar.toString();
 
     if (ctor === Array) {
-      if ((len=foo.length) === bar.length) {
+      if ((len = foo.length) === bar.length) {
         while (len-- && dequal(foo[len], bar[len]));
       }
       return len === -1;

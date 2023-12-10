@@ -3,29 +3,14 @@ import React, { forwardRef, useCallback, useEffect } from 'react';
 
 import { usePlaceKit } from './usePlaceKit';
 
-const PlaceKit = forwardRef(({
-  apiKey,
-  className,
-  geolocation,
-  options,
-  onClient,
-  onOpen,
-  onClose,
-  onResults,
-  onPick,
-  onError,
-  onCountryChange,
-  onDirty,
-  onEmpty,
-  onFreeForm,
-  onGeolocation,
-  onCountryMode,
-  onState,
-  ...inputProps
-}, ref) => {
-  const { target, client, state } = usePlaceKit(apiKey, {
-    ...options,
-    handlers: {
+const PlaceKit = forwardRef(
+  (
+    {
+      apiKey,
+      className,
+      geolocation,
+      options,
+      onClient,
       onOpen,
       onClose,
       onResults,
@@ -38,22 +23,37 @@ const PlaceKit = forwardRef(({
       onGeolocation,
       onCountryMode,
       onState,
+      ...inputProps
     },
-  });
+    ref,
+  ) => {
+    const { target, client, state } = usePlaceKit(apiKey, {
+      ...options,
+      handlers: {
+        onOpen,
+        onClose,
+        onResults,
+        onPick,
+        onError,
+        onCountryChange,
+        onDirty,
+        onEmpty,
+        onFreeForm,
+        onGeolocation,
+        onCountryMode,
+        onState,
+      },
+    });
 
-  // update default value (only if untouched)
-  useEffect(
-    () => {
+    // update default value (only if untouched)
+    useEffect(() => {
       if (client && !client.state.dirty) {
         client.setValue(inputProps.defaultValue);
       }
-    },
-    [inputProps.defaultValue, client]
-  );
+    }, [inputProps.defaultValue, client]);
 
-  // forward ref from `target`
-  useEffect(
-    () => {
+    // forward ref from `target`
+    useEffect(() => {
       if (target.current && ref) {
         if (typeof ref === 'function') {
           ref(target.current);
@@ -61,23 +61,17 @@ const PlaceKit = forwardRef(({
           ref.current = target.current;
         }
       }
-    },
-    [target.current]
-  );
+    }, [target.current]);
 
-  // pass client to `onClient` when it updates
-  useEffect(
-    () => {
+    // pass client to `onClient` when it updates
+    useEffect(() => {
       if (onClient?.call) {
         onClient(client);
       }
-    },
-    [client, onClient]
-  );
+    }, [client, onClient]);
 
-  // toggle geolocation
-  const toggleGeolocation = useCallback(
-    () => {
+    // toggle geolocation
+    const toggleGeolocation = useCallback(() => {
       if (client) {
         if (client.state.geolocation) {
           client.clearGeolocation();
@@ -85,56 +79,45 @@ const PlaceKit = forwardRef(({
           client.requestGeolocation();
         }
       }
-    },
-    [client]
-  );
+    }, [client]);
 
-  return (
-    <div
-      className={[
-        'pka-input',
-        className
-      ].filter((c) => c).join(' ')}
-    >
-      {!!geolocation && (
+    return (
+      <div className={['pka-input', className].filter((c) => c).join(' ')}>
+        {!!geolocation && (
+          <button
+            type="button"
+            className={['pka-input-geolocation', state.geolocation ? 'pka-enabled' : '']
+              .join(' ')
+              .trim()}
+            title="Activate geolocation"
+            role="switch"
+            aria-checked={state.geolocation}
+            onClick={toggleGeolocation}
+            disabled={inputProps.disabled}
+          >
+            <span className="pka-sr-only">Activate geolocation</span>
+          </button>
+        )}
         <button
           type="button"
-          className={[
-            'pka-input-geolocation',
-            state.geolocation ? 'pka-enabled' : '',
-          ].join(' ').trim()}
-          title="Activate geolocation"
-          role="switch"
-          aria-checked={state.geolocation}
-          onClick={toggleGeolocation}
+          className="pka-input-clear"
+          title="Clear value"
+          aria-hidden={state.empty}
+          onClick={client?.clear}
           disabled={inputProps.disabled}
         >
-          <span className="pka-sr-only">Activate geolocation</span>
+          <span className="pka-sr-only">Clear value</span>
         </button>
-      )}
-      <button
-        type="button"
-        className="pka-input-clear"
-        title="Clear value"
-        aria-hidden={state.empty}
-        onClick={client?.clear}
-        disabled={inputProps.disabled}
-      >
-        <span className="pka-sr-only">Clear value</span>
-      </button>
-      <input
-        {...inputProps}
-        type="search"
-        ref={target}
-      />
-    </div>
-  );
-});
+        <input {...inputProps} type="search" ref={target} />
+      </div>
+    );
+  },
+);
 
 PlaceKit.defaultProps = {
   geolocation: true,
   options: {},
-  placeholder: "Search places...",
+  placeholder: 'Search places...',
 };
 
 PlaceKit.propTypes = {
