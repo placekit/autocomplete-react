@@ -18,7 +18,8 @@
   <a href="#-component-properties">Component properties</a> • 
   <a href="#-custom-hook">Custom hook</a> • 
   <a href="#-Troubleshoot">Troubleshoot</a> • 
-  <a href="#%EF%B8%8F-license">License</a>
+  <a href="#%EF%B8%8F-license">License</a> • 
+  <a href="https://github.com/placekit/examples">Examples</a>
 </p>
 
 ---
