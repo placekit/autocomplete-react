@@ -1,6 +1,6 @@
 {
   "name": "@placekit/autocomplete-react",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "author": "PlaceKit <support@placekit.io>",
   "description": "PlaceKit Autocomplete React library",
   "license": "MIT",
@@ -38,7 +38,7 @@
     "format": "prettier --write ./src"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.5",
+    "@babel/core": "^7.23.6",
     "@babel/preset-react": "^7.23.3",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -49,11 +49,11 @@
     "npm-watch": "^0.11.0",
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
-    "rollup": "^4.7.0",
+    "rollup": "^4.8.0",
     "rollup-plugin-copy": "^3.5.0"
   },
   "dependencies": {
-    "@placekit/autocomplete-js": "^2.1.7",
+    "@placekit/autocomplete-js": "^2.1.8",
     "@types/react": "^18.2.43",
     "prop-types": "^15.8.1"
   },
