@@ -25,7 +25,7 @@
 ---
 
 PlaceKit Autocomplete React Library is a React wrapper of [PlaceKit Autocomplete JS](https://github.com/placekit/autocomplete-js).
-It features a [compoment](./src/PlaceKit.jsx) ready to use, and a [custom hook](./src/usePlaceKit.js) for custom implementations.
+It features a [component](./src/PlaceKit.jsx) ready to use, and a [custom hook](./src/usePlaceKit.js) for custom implementations.
 It also is **TypeScript compatible**.
 
 ## 🎯 Quick start
