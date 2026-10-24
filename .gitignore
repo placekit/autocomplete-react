@@ -5,6 +5,7 @@
 /demo
 /NOTES.md
 /*.sh
+/.claude
 
 # dependencies
 node_modules
