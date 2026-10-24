@@ -6,6 +6,7 @@ import { usePlaceKit } from './usePlaceKit';
 // default props as parameter defaults (React 19 ignores `defaultProps` on function components)
 // `options` default is a module-level constant to keep a stable reference across renders
 const DEFAULT_OPTIONS = {};
+const DEFAULT_PLACEHOLDER = 'Search places...';
 
 const PlaceKit = forwardRef(
   (
@@ -14,7 +15,7 @@ const PlaceKit = forwardRef(
       className,
       geolocation = true,
       options = DEFAULT_OPTIONS,
-      placeholder = 'Search places...',
+      placeholder = DEFAULT_PLACEHOLDER,
       onClient,
       onOpen,
       onClose,
@@ -119,11 +120,17 @@ const PlaceKit = forwardRef(
   },
 );
 
+// kept for backward compatibility on React 16 to 18 (apps reading or mutating `PlaceKit.defaultProps`)
+PlaceKit.defaultProps = {
+  geolocation: true,
+  options: DEFAULT_OPTIONS,
+  placeholder: DEFAULT_PLACEHOLDER,
+};
+
 PlaceKit.propTypes = {
   // component options
   geolocation: PropTypes.bool,
   className: PropTypes.string,
-  placeholder: PropTypes.string,
 
   // PlaceKit Autocomplete JS options
   apiKey: PropTypes.string.isRequired,
