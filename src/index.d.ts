@@ -34,6 +34,6 @@ export type PlaceKitHooks = {
   state: PKAState;
 };
 
-declare function PlaceKit(props: PlaceKitProps): JSX.Element;
+declare function PlaceKit(props: PlaceKitProps): React.ReactElement;
 
 declare function usePlaceKit(apiKey: string, options?: PlaceKitOptions): PlaceKitHooks;

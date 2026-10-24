@@ -3,13 +3,19 @@ import React, { forwardRef, useCallback, useEffect } from 'react';
 
 import { usePlaceKit } from './usePlaceKit';
 
+// default props as parameter defaults (React 19 ignores `defaultProps` on function components)
+// `options` default is a module-level constant to keep a stable reference across renders
+const DEFAULT_OPTIONS = {};
+const DEFAULT_PLACEHOLDER = 'Search places...';
+
 const PlaceKit = forwardRef(
   (
     {
       apiKey,
       className,
-      geolocation,
-      options,
+      geolocation = true,
+      options = DEFAULT_OPTIONS,
+      placeholder = DEFAULT_PLACEHOLDER,
       onClient,
       onOpen,
       onClose,
@@ -108,16 +114,17 @@ const PlaceKit = forwardRef(
         >
           <span className="pka-sr-only">Clear value</span>
         </button>
-        <input {...inputProps} type="search" ref={target} />
+        <input {...inputProps} placeholder={placeholder} type="search" ref={target} />
       </div>
     );
   },
 );
 
+// kept for backward compatibility on React 16 to 18 (apps reading or mutating `PlaceKit.defaultProps`)
 PlaceKit.defaultProps = {
   geolocation: true,
-  options: {},
-  placeholder: 'Search places...',
+  options: DEFAULT_OPTIONS,
+  placeholder: DEFAULT_PLACEHOLDER,
 };
 
 PlaceKit.propTypes = {

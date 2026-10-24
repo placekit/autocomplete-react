@@ -4,7 +4,7 @@ import { babel } from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import copy from 'rollup-plugin-copy';
 
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json' with { type: 'json' };
 const banner = [
   `/*! ${pkg.name} v${pkg.version}`,
   '© placekit.io',
